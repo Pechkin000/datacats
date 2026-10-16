@@ -1,2 +1,10 @@
 .directory
 /.directory
+/supporting-scripts/
+/venv/
+.venv/
+supporting-scripts/ms.app.json
+.env
+.env.*
+node_modules/
+dist/

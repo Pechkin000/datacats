@@ -1,0 +1,27 @@
+{
+  "mcpServers": {
+    "material-design-3": {
+      "command": "npx",
+      "args": ["-y", "mcp-material-design-3"],
+      "env": {
+        "THEME_DEFAULT": "dark",
+        "ENABLE_TAILWIND_MAPPING": "true"
+      }
+    },
+    "chrome-dev-tools": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-playwright"]
+    },
+    "playwright": {
+      "command": "npx",
+      "args": ["@playwright/mcp@latest"]
+    },
+    "page-design-guide": {
+      "command": "node",
+      "args": ["/home/pechkin000/Development/FullStack/datacats/datacats-web/node_modules/page-design-guide-mcp/build/index.js"]
+    },
+    "relume-library": {
+      "serverUrl": "https://relume-library-mcp.relume.io/mcp"
+    }
+  }
+}

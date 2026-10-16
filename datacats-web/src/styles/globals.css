@@ -1,0 +1,101 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-sans antialiased transition-colors duration-300;
+    @apply bg-light-surface text-light-text-primary;
+  }
+
+  .dark body {
+    @apply bg-dark-surface text-dark-text-primary;
+  }
+}
+
+@layer components {
+  .interactive {
+    @apply transition-all duration-200 ease-bounce;
+  }
+
+  .interactive:hover {
+    @apply scale-[1.02];
+  }
+
+  .interactive:active {
+    @apply scale-[0.98];
+  }
+
+  .hover-lift {
+    @apply transition-all duration-200 ease-bounce;
+  }
+
+  .hover-lift:hover {
+    @apply -translate-y-1 scale-[1.02] shadow-lg;
+  }
+
+  .hover-glow:hover {
+    @apply shadow-[0_0_20px_rgba(245,158,11,0.35)];
+  }
+
+  .dark .hover-glow:hover {
+    @apply shadow-[0_0_20px_rgba(6,182,212,0.35)];
+  }
+
+  .nav-link {
+    @apply relative text-light-text-secondary transition-colors duration-200;
+  }
+
+  .nav-link::after {
+    @apply absolute -bottom-1 left-0 h-0.5 w-0 bg-brand-gold transition-all duration-200 content-[''];
+  }
+
+  .nav-link:hover {
+    @apply text-light-text-primary;
+  }
+
+  .nav-link:hover::after {
+    @apply w-full;
+  }
+
+  .dark .nav-link {
+    @apply text-dark-text-secondary;
+  }
+
+  .dark .nav-link:hover {
+    @apply text-dark-text-primary;
+  }
+
+  .dark .nav-link::after {
+    @apply bg-brand-cyan;
+  }
+
+  .surface-card {
+    @apply rounded-2xl bg-light-card p-6 shadow-sm transition-all duration-200 ease-bounce;
+  }
+
+  .dark .surface-card {
+    @apply bg-dark-card;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

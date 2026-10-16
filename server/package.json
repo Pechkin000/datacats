@@ -1,0 +1,17 @@
+{
+  "name": "datacats-server",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Lead form backend for datacats.ca",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
