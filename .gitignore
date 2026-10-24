@@ -8,3 +8,4 @@ supporting-scripts/ms.app.json
 .env.*
 node_modules/
 dist/
+*postman*

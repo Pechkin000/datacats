@@ -1,21 +1,21 @@
 # Current Work Log - DataCats Website
 
-**Last Updated:** 2026-10-16
+**Last Updated:** 2026-10-23
 
 ## Status
 
-The site and lead backend run locally and are pushed to `origin/main` (commit `17cbcd2`). Real email sending is not yet tested.
+The site and lead backend run locally and are pushed to `origin/main` (commit `d358499`). Real email sending is not yet tested.
 
 | Phase | Status | Notes |
 |-------|--------|-------|
 | 1. Project foundation | Done | `datacats-web/` (Vite, React, TS, Tailwind 3); backend in `server/` |
-| 2. Asset integration | Done | Logos and hero GIF switch by theme; the `.mp4` is unused |
+| 2. Asset integration | Done | Logos and hero GIF switch by theme (`public/assets/img/`); `.gitignore` fixed so `public/assets/` is tracked; the `.mp4` is unused |
 | 3. Core components | Done | Theme provider, Button, Card, Badge, Logo, Navbar, Footer |
 | 4. Pages | Done | Home, Solutions, Penelope, Contact; gallery uses placeholder tiles |
 | 5. Styling and animation | Done | Hover bounce, framer-motion, reduced-motion support |
 | 6. Accessibility and SEO | Partial | Skip link, labels, aria on forms, page meta; no structured data |
 | 7. Testing and QA | Partial | Backend tests pass; manual theme and form checks; no Lighthouse or cross-browser run |
-| 8. Deployment | Not started | Namecheap cPanel Node.js app |
+| 8. Deployment | In progress | `.github/workflows/deploy.yml` added for GitHub Actions → Namecheap cPanel SSH deploy |
 
 ## Open Items
 
@@ -37,3 +37,4 @@ The site and lead backend run locally and are pushed to `origin/main` (commit `1
 
 - 2026-10-15: planning session, implementation plan, asset review.
 - 2026-10-16: built the site, theme system and forms; added the Node lead backend and tests; consolidated project docs and customization files under `.github/` and `docs/`.
+- 2026-10-23: installed frontend (`datacats-web/`) and backend (`server/`) dependencies; verified lint, production build, and backend tests; copied brand assets from `assets/img/` to `datacats-web/public/assets/img/` and anchored `/assets/` in `datacats-web/.gitignore` so `public/assets/` is not ignored; started local Vite dev server and dry-run Express backend; added `.github/workflows/deploy.yml` for automated GitHub Actions deployment to Namecheap cPanel over SSH.

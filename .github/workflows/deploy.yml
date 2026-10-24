@@ -1,0 +1,103 @@
+name: Deploy to Namecheap cPanel
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+          cache-dependency-path: |
+            datacats-web/package-lock.json
+            server/package-lock.json
+
+      - name: Run backend tests
+        working-directory: server
+        run: |
+          npm ci
+          npm test
+
+      - name: Install and build frontend
+        working-directory: datacats-web
+        run: |
+          npm ci
+          npm run lint
+          npm run build
+
+      - name: Set up SSH key
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_PASSPHRASE: ${{ secrets.SSH_PASSPHRASE }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_PORT: ${{ secrets.SSH_PORT || '21098' }}
+        run: |
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/id_deploy
+          chmod 600 ~/.ssh/id_deploy
+          if [ -n "$SSH_PASSPHRASE" ]; then
+            ssh-keygen -p -P "$SSH_PASSPHRASE" -N "" -f ~/.ssh/id_deploy
+          fi
+          ssh-keyscan -p "$SSH_PORT" -H "$SSH_HOST" >> ~/.ssh/known_hosts
+
+      - name: Sync files to Namecheap cPanel
+        env:
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_PORT: ${{ secrets.SSH_PORT || '21098' }}
+          RAW_DEPLOY_PATH: ${{ secrets.DEPLOY_PATH || '/home/datavgxt/datacats.ca' }}
+        run: |
+          # Normalize ~ and strip trailing /server if DEPLOY_PATH was set to ~/datacats.ca/server
+          BASE_PATH="${RAW_DEPLOY_PATH/#\~//home/$SSH_USER}"
+          BASE_PATH="${BASE_PATH%/}"
+          BASE_PATH="${BASE_PATH%/server}"
+
+          ssh -i ~/.ssh/id_deploy -p "$SSH_PORT" "$SSH_USER@$SSH_HOST" \
+            "mkdir -p $BASE_PATH/datacats-web/dist $BASE_PATH/server/tmp"
+
+          rsync -az --delete \
+            -e "ssh -i ~/.ssh/id_deploy -p $SSH_PORT" \
+            datacats-web/dist/ \
+            "$SSH_USER@$SSH_HOST:$BASE_PATH/datacats-web/dist/"
+
+          rsync -az --delete \
+            --exclude 'node_modules' \
+            --exclude 'tmp' \
+            --exclude '.env*' \
+            --exclude 'test' \
+            -e "ssh -i ~/.ssh/id_deploy -p $SSH_PORT" \
+            server/ \
+            "$SSH_USER@$SSH_HOST:$BASE_PATH/server/"
+
+      - name: Install production server dependencies & restart Passenger
+        env:
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_PORT: ${{ secrets.SSH_PORT || '21098' }}
+          RAW_DEPLOY_PATH: ${{ secrets.DEPLOY_PATH || '/home/datavgxt/datacats.ca' }}
+        run: |
+          BASE_PATH="${RAW_DEPLOY_PATH/#\~//home/$SSH_USER}"
+          BASE_PATH="${BASE_PATH%/}"
+          BASE_PATH="${BASE_PATH%/server}"
+
+          ssh -i ~/.ssh/id_deploy -p "$SSH_PORT" "$SSH_USER@$SSH_HOST" << EOF
+            set -e
+            source /home/datavgxt/nodevenv/datacats.ca/server/24/bin/activate
+            cd $BASE_PATH/server
+            npm ci --omit=dev
+            mkdir -p tmp
+            touch tmp/restart.txt
+          EOF
+

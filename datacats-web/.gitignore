@@ -22,6 +22,9 @@ dist-ssr
 *.sln
 *.sw?
 supporting-scripts/*
-assets/
+/assets/
 docs/
+*postman*
+*postman*
+.github/instructions/postman*
 
