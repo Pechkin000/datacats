@@ -4,7 +4,7 @@
 
 ## Status
 
-The site and lead backend run locally and are pushed to `origin/main` (commit `d358499`). Real email sending is not yet tested.
+The site and lead backend run locally and are deployed to Namecheap cPanel via GitHub Actions on push to `origin/main` (commit `8594f0f`).
 
 | Phase | Status | Notes |
 |-------|--------|-------|
@@ -15,7 +15,7 @@ The site and lead backend run locally and are pushed to `origin/main` (commit `d
 | 5. Styling and animation | Done | Hover bounce, framer-motion, reduced-motion support |
 | 6. Accessibility and SEO | Partial | Skip link, labels, aria on forms, page meta; no structured data |
 | 7. Testing and QA | Partial | Backend tests pass; manual theme and form checks; no Lighthouse or cross-browser run |
-| 8. Deployment | In progress | `.github/workflows/deploy.yml` added for GitHub Actions → Namecheap cPanel SSH deploy |
+| 8. Deployment | Done | Automated GitHub Actions SSH deploy (`.github/workflows/deploy.yml`) to Namecheap cPanel Node.js 24 app |
 
 ## Open Items
 
@@ -37,4 +37,4 @@ The site and lead backend run locally and are pushed to `origin/main` (commit `d
 
 - 2026-10-15: planning session, implementation plan, asset review.
 - 2026-10-16: built the site, theme system and forms; added the Node lead backend and tests; consolidated project docs and customization files under `.github/` and `docs/`.
-- 2026-10-23: installed frontend (`datacats-web/`) and backend (`server/`) dependencies; verified lint, production build, and backend tests; copied brand assets from `assets/img/` to `datacats-web/public/assets/img/` and anchored `/assets/` in `datacats-web/.gitignore` so `public/assets/` is not ignored; started local Vite dev server and dry-run Express backend; added `.github/workflows/deploy.yml` for automated GitHub Actions deployment to Namecheap cPanel over SSH.
+- 2026-10-23: installed frontend (`datacats-web/`) and backend (`server/`) dependencies; verified lint, production build, and backend tests; copied brand assets from `assets/img/` to `datacats-web/public/assets/img/` and anchored `/assets/` in `datacats-web/.gitignore` so `public/assets/` is not ignored; started local Vite dev server and dry-run Express backend; added `.github/workflows/deploy.yml` for automated GitHub Actions deployment to Namecheap cPanel over SSH; added `.version` (`VERSION=1.0`) and automatic CI/CD deployment version bumping displayed in `Footer.tsx`.

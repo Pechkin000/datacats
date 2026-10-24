@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { Logo } from '../ui/Logo';
 
 const year = new Date().getFullYear();
+const appVersion = import.meta.env.VITE_APP_VERSION || '1.0.1';
 
 export function Footer() {
   return (
@@ -42,7 +43,7 @@ export function Footer() {
             © {year} DataCats Business Intelligence. All rights reserved.
           </p>
           <p className="text-xs text-light-text-secondary dark:text-dark-text-secondary">
-            Made with 🐱 and data.
+            Made with 🐱 and data. (CI/CD Deployment v {appVersion})
           </p>
         </div>
       </div>
