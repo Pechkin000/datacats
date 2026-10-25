@@ -7,6 +7,7 @@ applyTo: "datacats-web/src/**"
 - Tailwind 3 syntax. Colors come from `tailwind.config.js`: `light.*`, `dark.*`, `brand.gold|amber|cyan`. Light accent is gold, dark accent is cyan, written as `text-brand-gold dark:text-brand-cyan`.
 - Theme: class strategy through `ThemeProvider` and `useTheme()` (`src/components/layout/ThemeProvider.tsx`, `src/hooks/useTheme.ts`). Never keep separate theme state in a component.
 - Logos and the hero GIF switch by theme through `Logo` and `useTheme()`. Dark theme assets live in `public/assets/img/darke-theme/` and carry a `-light` suffix.
+- For adding or updating report sample screenshots on `/presentation`, follow `docs/report-samples-workflow.md` (source in `assets/img/samples/`, copy to `datacats-web/public/assets/img/samples/`, opposite-contrast default report theme).
 - Hover bounce: every interactive element gets a slight bounce (scale about 1.02, up to 1.05 for buttons). Reuse the `interactive` and `hover-lift` classes and `ease-bounce` from `globals.css`; do not hand-roll transitions.
 - Respect `prefers-reduced-motion`; `globals.css` already disables motion globally.
 - Accessibility: every input has a `<label htmlFor>`, errors use `role="alert"` and `aria-describedby`, icon-only buttons have an `aria-label`, headings stay in order.

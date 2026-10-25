@@ -25,6 +25,7 @@ DataCats Business Intelligence marketing site: a React frontend (`datacats-web/`
 
 - Brand and page spec: `docs/site-spec.md`
 - Implementation plan: `docs/implementation_plan.md`
+- Report samples workflow: `docs/report-samples-workflow.md`
 - Status log (keep updated): `docs/current_work.md`
 - MCP servers are defined twice and must stay in sync: `.vscode/.copilot/config.json` (Copilot, `mcp.servers`) and `antigravity.mcp.json` (Antigravity, `mcpServers`).
 - Open Terminal (`http://10.0.0.149:8888/docs`, bearer key required) is a remote terminal on another machine, not an MCP server. Use the VS Code terminal for project commands.
