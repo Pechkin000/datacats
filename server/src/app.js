@@ -4,10 +4,31 @@ const fs = require('fs');
 const path = require('path');
 const express = require('express');
 const { validateLead, formatLead } = require('./lead');
-const { sendMail } = require('./graph');
+const { sendMail, isConfigured } = require('./graph');
 
 const WINDOW_MS = 10 * 60 * 1000;
 const MAX_PER_WINDOW = 5;
+
+function isOriginAllowed(origin, allowedRaw) {
+  if (!allowedRaw || !origin) return true;
+  const allowedSet = new Set();
+  for (const item of allowedRaw.split(',')) {
+    const clean = item.trim().replace(/^['"]|['"]$/g, '').replace(/\/+$/, '');
+    if (!clean) continue;
+    allowedSet.add(clean);
+    try {
+      const u = new URL(clean);
+      if (u.hostname.startsWith('www.')) {
+        allowedSet.add(`${u.protocol}//${u.hostname.slice(4)}${u.port ? `:${u.port}` : ''}`);
+      } else {
+        allowedSet.add(`${u.protocol}//www.${u.hostname}${u.port ? `:${u.port}` : ''}`);
+      }
+    } catch {
+      // Ignore malformed URL in ALLOWED_ORIGIN
+    }
+  }
+  return allowedSet.size === 0 || allowedSet.has(origin.replace(/\/+$/, ''));
+}
 
 function createRateLimiter() {
   const hits = new Map();
@@ -32,11 +53,11 @@ function createApp({ staticDir = process.env.STATIC_DIR || path.join(__dirname, 
   app.set('trust proxy', 1);
   app.use(express.json({ limit: '32kb' }));
 
-  app.get('/api/health', (_req, res) => res.json({ ok: true }));
+  app.get('/api/health', (_req, res) => res.json({ ok: true, mailConfigured: isConfigured() }));
 
   app.post('/api/lead', async (req, res) => {
     const allowed = process.env.ALLOWED_ORIGIN;
-    if (allowed && req.get('origin') && req.get('origin') !== allowed) {
+    if (!isOriginAllowed(req.get('origin'), allowed)) {
       return res.status(403).json({ error: 'Forbidden' });
     }
     if (limited(req.ip)) {

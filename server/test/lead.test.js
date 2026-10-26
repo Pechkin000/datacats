@@ -123,3 +123,23 @@ test('Graph flow: token request then sendMail with reply-to', async () => {
   assert.equal(msg.message.replyTo[0].emailAddress.address, 'ann@acme.co');
   assert.equal(msg.message.body.contentType, 'Text');
 });
+
+test('Origin check allows both apex and www subdomain when ALLOWED_ORIGIN is set', async () => {
+  process.env.ALLOWED_ORIGIN = 'https://datacats.ca';
+  try {
+    await withServer(createApp({ staticDir: '/nonexistent' }), async (base) => {
+      const postOrigin = (origin) =>
+        fetch(`${base}/api/lead`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Origin: origin },
+          body: JSON.stringify({ type: 'quick', name: 'Ann', email: 'ann@acme.co', message: 'Hello' }),
+        });
+
+      assert.equal((await postOrigin('https://datacats.ca')).status, 200);
+      assert.equal((await postOrigin('https://www.datacats.ca')).status, 200);
+      assert.equal((await postOrigin('https://evil.example.com')).status, 403);
+    });
+  } finally {
+    delete process.env.ALLOWED_ORIGIN;
+  }
+});

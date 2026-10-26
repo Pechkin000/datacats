@@ -2,9 +2,17 @@
 
 let cached = { token: null, expiresAt: 0 };
 
+function cleanEnv(value) {
+  if (typeof value !== 'string') return '';
+  return value.trim().replace(/,+$/, '').trim().replace(/^['"]|['"]$/g, '').trim();
+}
+
 function config() {
-  const { TENANT_ID, CLIENT_ID, CLIENT_SECRET, MAIL_FROM } = process.env;
-  const MAIL_TO = process.env.MAIL_TO || MAIL_FROM;
+  const TENANT_ID = cleanEnv(process.env.TENANT_ID || process.env.tenantId);
+  const CLIENT_ID = cleanEnv(process.env.CLIENT_ID || process.env.clientId);
+  const CLIENT_SECRET = cleanEnv(process.env.CLIENT_SECRET || process.env.clientSecret);
+  const MAIL_FROM = cleanEnv(process.env.MAIL_FROM || process.env.mailFrom) || 'josh@datacats.ca';
+  const MAIL_TO = cleanEnv(process.env.MAIL_TO || process.env.mailTo) || MAIL_FROM;
   return { TENANT_ID, CLIENT_ID, CLIENT_SECRET, MAIL_FROM, MAIL_TO };
 }
 

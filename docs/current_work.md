@@ -1,6 +1,6 @@
 # Current Work Log - DataCats Website
 
-**Last Updated:** 2026-10-24
+**Last Updated:** 2026-10-25
 
 ## Status
 
@@ -39,3 +39,4 @@ The site and lead backend run locally and are deployed to Namecheap cPanel via G
 - 2026-10-16: built the site, theme system and forms; added the Node lead backend and tests; consolidated project docs and customization files under `.github/` and `docs/`.
 - 2026-10-23: installed frontend (`datacats-web/`) and backend (`server/`) dependencies; verified lint, production build, and backend tests; copied brand assets from `assets/img/` to `datacats-web/public/assets/img/` and anchored `/assets/` in `datacats-web/.gitignore` so `public/assets/` is not ignored; started local Vite dev server and dry-run Express backend; added `.github/workflows/deploy.yml` for automated GitHub Actions deployment to Namecheap cPanel over SSH; added `.version` (`VERSION=1.0`) and automatic CI/CD deployment version bumping displayed in `Footer.tsx`.
 - 2026-10-24: copied light/dark Power BI sample screenshots (`light-sample1.png`, `dark-sample1.png`) into `datacats-web/public/assets/img/samples/`; updated `Presentation.tsx` so report samples default to opposite contrast (dark reports in light site theme, light reports in dark site theme), added a section-level report theme toggle under "Report Samples" (`Use the theme switcher to preview light/dark versions of the reports.`) that switches all reports, added a temporary modal-only theme toggle (`View Light Version` / `View Dark Version`) inside the zoomed-in report preview, and documented the workflow in `docs/report-samples-workflow.md`.
+- 2026-10-25: verified Microsoft Graph `Mail.Send` credentials against `josh@datacats.ca`; hardened `server/src/graph.js`, `server/src/app.js`, and `server/app.js` to accept both `UPPER_SNAKE_CASE` and camelCase env vars (`TENANT_ID`/`tenantId`, `CLIENT_ID`/`clientId`, `CLIENT_SECRET`/`clientSecret`, `MAIL_FROM`/`mailFrom`), strip accidental quotes/commas, default `MAIL_FROM` to `josh@datacats.ca`, allow both `datacats.ca` and `www.datacats.ca` in `ALLOWED_ORIGIN`, and report `mailConfigured` in `/api/health`.
