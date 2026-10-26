@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const express = require('express');
 const { validateLead, formatLead } = require('./lead');
-const { sendMail, isConfigured } = require('./graph');
+const { sendMail, isConfigured, verifyConfig } = require('./graph');
 
 const WINDOW_MS = 10 * 60 * 1000;
 const MAX_PER_WINDOW = 5;
@@ -53,7 +53,13 @@ function createApp({ staticDir = process.env.STATIC_DIR || path.join(__dirname, 
   app.set('trust proxy', 1);
   app.use(express.json({ limit: '32kb' }));
 
-  app.get('/api/health', (_req, res) => res.json({ ok: true, mailConfigured: isConfigured() }));
+  app.get('/api/health', async (req, res) => {
+    if (req.query.verify === '1') {
+      const diag = await verifyConfig();
+      return res.json({ ok: true, mailConfigured: isConfigured(), diag });
+    }
+    return res.json({ ok: true, mailConfigured: isConfigured() });
+  });
 
   app.post('/api/lead', async (req, res) => {
     const allowed = process.env.ALLOWED_ORIGIN;

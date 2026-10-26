@@ -37,8 +37,19 @@ async function getToken() {
   });
 
   if (!res.ok) {
-    // Response body can echo configuration details, so only the status is surfaced.
-    throw new Error(`Microsoft token request failed (HTTP ${res.status})`);
+    let code = '';
+    try {
+      const errBody = await res.json();
+      if (Array.isArray(errBody.error_codes) && errBody.error_codes.length) {
+        code = ` AADSTS${errBody.error_codes[0]}`;
+      } else if (typeof errBody.error === 'string') {
+        code = ` ${errBody.error}`;
+      }
+    } catch {
+      // Ignore JSON parse errors
+    }
+    // Response body can echo configuration details, so only the status and error code are surfaced.
+    throw new Error(`Microsoft token request failed (HTTP ${res.status}${code})`);
   }
   const data = await res.json();
   cached = { token: data.access_token, expiresAt: Date.now() + data.expires_in * 1000 };
@@ -69,7 +80,44 @@ async function sendMail({ subject, text, replyTo }) {
     }),
   });
 
-  if (res.status !== 202) throw new Error(`Graph sendMail failed (HTTP ${res.status})`);
+  if (res.status !== 202) {
+    let code = '';
+    try {
+      const errBody = await res.json();
+      if (errBody && errBody.error && typeof errBody.error.code === 'string') {
+        code = ` ${errBody.error.code}`;
+      }
+    } catch {
+      // Ignore JSON parse errors
+    }
+    throw new Error(`Graph sendMail failed (HTTP ${res.status}${code})`);
+  }
 }
 
-module.exports = { sendMail, isConfigured };
+function maskId(v) {
+  if (!v) return '';
+  if (v.length <= 8) return `(${v.length})`;
+  return `${v.slice(0, 4)}...${v.slice(-4)} (${v.length})`;
+}
+
+async function verifyConfig() {
+  const c = config();
+  const summary = {
+    tenantId: maskId(c.TENANT_ID),
+    clientId: maskId(c.CLIENT_ID),
+    secretLength: c.CLIENT_SECRET ? c.CLIENT_SECRET.length : 0,
+    mailFrom: c.MAIL_FROM,
+    mailTo: c.MAIL_TO,
+  };
+  if (!isConfigured()) {
+    return { configured: false, summary };
+  }
+  try {
+    await getToken();
+    return { configured: true, tokenOk: true, summary };
+  } catch (err) {
+    return { configured: true, tokenOk: false, error: err.message, summary };
+  }
+}
+
+module.exports = { sendMail, isConfigured, verifyConfig };
