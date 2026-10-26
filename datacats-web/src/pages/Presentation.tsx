@@ -59,7 +59,14 @@ const galleryItems: GalleryItem[] = [
   { id: 2, title: 'Sales Pipeline', platform: 'Tableau', color: 'cyan' },
   { id: 3, title: 'Financial Workbook', platform: 'Excel', color: 'green' },
   { id: 4, title: 'Warehouse Metrics', platform: 'BigQuery', color: 'slate' },
-  { id: 5, title: 'Client Journey', platform: 'Power BI', color: 'gold' },
+  {
+    id: 5,
+    title: 'Client Journey',
+    platform: 'Power BI',
+    color: 'gold',
+    lightImage: '/assets/img/samples/light-sample2.png',
+    darkImage: '/assets/img/samples/dark-sample2.png',
+  },
   { id: 6, title: 'Utilization Heatmap', platform: 'Tableau', color: 'cyan' },
 ];
 

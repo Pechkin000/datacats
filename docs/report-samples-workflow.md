@@ -33,7 +33,7 @@ Add `lightImage` and `darkImage` to the target entry in `galleryItems` in `datac
 | `2` | Top-center | `Sales Pipeline` | `Tableau` | `cyan` | Placeholder |
 | `3` | Top-right | `Financial Workbook` | `Excel` | `green` | Placeholder |
 | `4` | Bottom-left | `Warehouse Metrics` | `BigQuery` | `slate` | Placeholder |
-| `5` | Bottom-center | `Client Journey` | `Power BI` | `gold` | Placeholder |
+| `5` | Bottom-center | `Client Journey` | `Power BI` | `gold` | Uses `light-sample2.png` / `dark-sample2.png` |
 | `6` | Bottom-right | `Utilization Heatmap` | `Tableau` | `cyan` | Placeholder |
 
 ## 3. Report Theme Behavior (Preserve as-is)
@@ -55,3 +55,4 @@ Add `lightImage` and `darkImage` to the target entry in `galleryItems` in `datac
 2. Update `docs/current_work.md`.
 3. Start local preview (`cd datacats-web && npm run dev`) if requested before pushing.
 4. Commit and push to `origin/main` — `.github/workflows/deploy.yml` automatically bumps the CI/CD patch version from `.version` and deploys to Namecheap cPanel.
+
