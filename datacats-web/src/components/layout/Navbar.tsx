@@ -21,9 +21,7 @@ export function Navbar() {
         <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
           <Link to="/" className="flex items-center gap-2 interactive">
             <Logo variant="icon" className="h-10 w-auto" />
-            <span className="hidden text-lg font-bold text-light-text-primary dark:text-dark-text-primary sm:block">
-              DataCats
-            </span>
+            <Logo variant="text" className="h-7 w-auto sm:h-8" />
           </Link>
 
           <div className="hidden items-center gap-8 md:flex">

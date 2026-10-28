@@ -3,6 +3,7 @@
 /supporting-scripts/
 /venv/
 .venv/
+supporting-scripts
 supporting-scripts/ms.app.json
 .env
 .env.*

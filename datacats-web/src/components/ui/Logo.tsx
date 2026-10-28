@@ -18,7 +18,10 @@ export function Logo({ variant = 'full', className = '' }: LogoProps) {
       case 'icon':
         return `/assets/img/${themeDir}/logo-cat${suffix}.svg`;
       case 'text':
-        return `/assets/img/${themeDir}/logo-text${suffix}.svg`;
+        // Text logo is intentionally inverted: light-version file in dark theme, dark-version file in light theme
+        return isDark
+          ? '/assets/img/light-theme/logo-text-light.svg'
+          : '/assets/img/darke-theme/logo-text-dark.svg';
       case 'full':
       default:
         return `/assets/img/${themeDir}/logo-text-cat${suffix}.svg`;
