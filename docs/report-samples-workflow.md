@@ -29,12 +29,12 @@ Add `lightImage` and `darkImage` to the target entry in `galleryItems` in `datac
 ### Current Gallery Slots (`galleryItems`)
 | `id` | Grid Position (Desktop 3x2) | Default Title | Platform | Badge Color | Status |
 |------|-----------------------------|---------------|----------|-------------|--------|
-| `1` | Top-left | `Executive Summary` | `Power BI` | `gold` | Uses `light-sample1.png` / `dark-sample1.png` |
-| `2` | Top-center | `Sales Pipeline` | `Tableau` | `cyan` | Placeholder |
-| `3` | Top-right | `Financial Workbook` | `Excel` | `green` | Placeholder |
-| `4` | Bottom-left | `Warehouse Metrics` | `BigQuery` | `slate` | Placeholder |
-| `5` | Bottom-center | `Client Journey` | `Power BI` | `gold` | Uses `light-sample2.png` / `dark-sample2.png` |
-| `6` | Bottom-right | `Utilization Heatmap` | `Tableau` | `cyan` | Placeholder |
+| `1` | Top-left | `Executive Summary` | `Power BI` | `gold` | Uses `light-sample1.png` / `dark-sample1.png` (original DataCats-branded mock) |
+| `2` | Top-center | `Sales Pipeline` | `Tableau` | `cyan` | Uses `light-sample3.png` / `dark-sample3.png` (original DataCats-branded mock) |
+| `3` | Top-right | `Financial Workbook` | `Excel` | `green` | Uses `light-sample5.png` / `dark-sample5.png` (original DataCats-branded mock) |
+| `4` | Bottom-left | `Warehouse Metrics` | `BigQuery` | `slate` | Uses `light-sample6.png` / `dark-sample6.png` (original DataCats-branded BigQuery-style mock) |
+| `5` | Bottom-center | `Client Journey` | `Power BI` | `gold` | Uses `light-sample2.png` / `dark-sample2.png` (original DataCats-branded mock) |
+| `6` | Bottom-right | `Utilization Heatmap` | `Tableau` | `cyan` | Uses `light-sample4.png` / `dark-sample4.png` (original DataCats-branded mock) |
 
 ## 3. Report Theme Behavior (Preserve as-is)
 

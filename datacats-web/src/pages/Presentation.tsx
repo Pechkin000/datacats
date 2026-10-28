@@ -45,6 +45,8 @@ interface GalleryItem {
   color: string;
   lightImage?: string;
   darkImage?: string;
+  /** CSS aspect-ratio of the zoom frame (light image); keeps frame size fixed when toggling themes. */
+  frameAspect?: string;
 }
 
 const galleryItems: GalleryItem[] = [
@@ -55,10 +57,35 @@ const galleryItems: GalleryItem[] = [
     color: 'gold',
     lightImage: '/assets/img/samples/light-sample1.png',
     darkImage: '/assets/img/samples/dark-sample1.png',
+    frameAspect: '16 / 9',
   },
-  { id: 2, title: 'Sales Pipeline', platform: 'Tableau', color: 'cyan' },
-  { id: 3, title: 'Financial Workbook', platform: 'Excel', color: 'green' },
-  { id: 4, title: 'Warehouse Metrics', platform: 'BigQuery', color: 'slate' },
+  {
+    id: 2,
+    title: 'Sales Pipeline',
+    platform: 'Tableau',
+    color: 'cyan',
+    lightImage: '/assets/img/samples/light-sample3.png',
+    darkImage: '/assets/img/samples/dark-sample3.png',
+    frameAspect: '16 / 9',
+  },
+  {
+    id: 3,
+    title: 'Financial Workbook',
+    platform: 'Excel',
+    color: 'green',
+    lightImage: '/assets/img/samples/light-sample5.png',
+    darkImage: '/assets/img/samples/dark-sample5.png',
+    frameAspect: '16 / 9',
+  },
+  {
+    id: 4,
+    title: 'Warehouse Metrics',
+    platform: 'BigQuery',
+    color: 'slate',
+    lightImage: '/assets/img/samples/light-sample6.png',
+    darkImage: '/assets/img/samples/dark-sample6.png',
+    frameAspect: '16 / 9',
+  },
   {
     id: 5,
     title: 'Client Journey',
@@ -66,8 +93,17 @@ const galleryItems: GalleryItem[] = [
     color: 'gold',
     lightImage: '/assets/img/samples/light-sample2.png',
     darkImage: '/assets/img/samples/dark-sample2.png',
+    frameAspect: '16 / 9',
   },
-  { id: 6, title: 'Utilization Heatmap', platform: 'Tableau', color: 'cyan' },
+  {
+    id: 6,
+    title: 'Utilization Heatmap',
+    platform: 'Tableau',
+    color: 'cyan',
+    lightImage: '/assets/img/samples/light-sample4.png',
+    darkImage: '/assets/img/samples/dark-sample4.png',
+    frameAspect: '16 / 9',
+  },
 ];
 
 export function Presentation() {
@@ -302,11 +338,16 @@ export function Presentation() {
                 <X className="h-5 w-5" />
               </button>
               {selectedImage ? (
-                <img
-                  src={selectedImage}
-                  alt={`${selectedItem.title} (${selectedItem.platform} ${activeZoomedTheme} theme preview)`}
-                  className="w-full rounded-xl border border-slate-200/60 shadow-lg dark:border-slate-700/60"
-                />
+                <div
+                  className="w-full overflow-hidden rounded-xl border border-slate-200/60 shadow-lg dark:border-slate-700/60"
+                  style={{ aspectRatio: selectedItem.frameAspect }}
+                >
+                  <img
+                    src={selectedImage}
+                    alt={`${selectedItem.title} (${selectedItem.platform} ${activeZoomedTheme} theme preview)`}
+                    className="h-full w-full object-contain"
+                  />
+                </div>
               ) : (
                 <>
                   <div className="aspect-video rounded-xl bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900" />
