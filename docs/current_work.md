@@ -1,20 +1,20 @@
 # Current Work Log - DataCats Website
 
-**Last Updated:** 2026-10-25
+**Last Updated:** 2026-10-30
 
 ## Status
 
-The site and lead backend run locally and are deployed to Namecheap cPanel via GitHub Actions on push to `origin/main` (commit `e1cf49d`).
+The site and lead backend run locally and are deployed to Namecheap cPanel via GitHub Actions on push to `origin/main`.
 
 | Phase | Status | Notes |
 |-------|--------|-------|
 | 1. Project foundation | Done | `datacats-web/` (Vite, React, TS, Tailwind 3); backend in `server/` |
-| 2. Asset integration | Done | Logos, hero GIF, and Power BI sample report switch by theme (`public/assets/img/`); `.gitignore` fixed so `public/assets/` is tracked; the `.mp4` is unused |
-| 3. Core components | Done | Theme provider, Button, Card, Badge, Logo, Navbar, Footer |
-| 4. Pages | Done | Home, Solutions, Penelope, Contact; both Power BI gallery cards (`Executive Summary` and `Client Journey`) use real light/dark report screenshots |
+| 2. Asset integration | Done | Logos (including inverted text logo per theme), hero GIF, and all 6 report sample slots switch by theme (`public/assets/img/`); `.gitignore` fixed so `public/assets/` is tracked; the `.mp4` is unused |
+| 3. Core components | Done | Theme provider, Button, Card, Badge, Logo, Navbar (cat icon + text logo), Footer |
+| 4. Pages | Done | Home, Solutions, Penelope, Contact; all 6 gallery slots use DataCats-branded light/dark report screenshots with fixed 16:9 zoom frame |
 | 5. Styling and animation | Done | Hover bounce, framer-motion, reduced-motion support |
-| 6. Accessibility and SEO | Partial | Skip link, labels, aria on forms, page meta; no structured data |
-| 7. Testing and QA | Partial | Backend tests pass; manual theme and form checks; no Lighthouse or cross-browser run |
+| 6. Accessibility, SEO, and Analytics | Partial | Skip link, labels, aria on forms, page meta, GA4 (`G-WHJLEG19K8`) via `react-ga4` with SPA route tracking; no structured data |
+| 7. Testing and QA | Partial | Backend tests pass; manual theme and form checks; GA4 network collect verified; no Lighthouse or cross-browser run |
 | 8. Deployment | Done | Automated GitHub Actions SSH deploy (`.github/workflows/deploy.yml`) to Namecheap cPanel Node.js 24 app |
 
 ## Open Items
@@ -22,13 +22,13 @@ The site and lead backend run locally and are deployed to Namecheap cPanel via G
 - Rotate exposed credentials: the Microsoft client secret, the 9Router key, and the Gemini key from VS Code settings.
 - Set `TENANT_ID`, `CLIENT_ID`, `CLIENT_SECRET`, `MAIL_FROM` in cPanel; grant `Mail.Send` consent; restrict the app to one mailbox; send a real test lead.
 - AI chat bot on the contact page: needs an LLM provider and key decision.
-- Replace gallery placeholders with real report screenshots.
 - Run Lighthouse and check Safari and Firefox.
 
 ## Key Decisions
 
-- React, Vite, TypeScript, Tailwind 3, framer-motion, lucide-react, react-router.
+- React, Vite, TypeScript, Tailwind 3, framer-motion, lucide-react, react-router, react-ga4.
 - Class-based dark mode with localStorage persistence, defaulting to the OS preference.
+- Google Analytics 4 (`G-WHJLEG19K8`) initialized in `datacats-web/src/main.tsx` with `RouteTracker` in `datacats-web/src/App.tsx` firing `pageview` hits on SPA route changes.
 - Leads are emailed to `josh@datacats.ca` through Microsoft Graph app-only auth (client credentials) from an Express backend; no redirect URI is needed.
 - Hosting on Namecheap shared hosting with a cPanel Node.js app, which also serves the built site.
 - Model selection is manual; see `.github/agents/builder-agent.agent.md`.
@@ -45,3 +45,5 @@ The site and lead backend run locally and are deployed to Namecheap cPanel via G
 - 2026-10-27: replaced the Tableau samples (`light/dark-sample3.png`, `light/dark-sample4.png`) with original DataCats-branded mock dashboards (Sales Pipeline Command Center, Utilization Heatmap; 2400x1350, 16/9 frame); removed the old `*-tableu-*` sources.
 - 2026-10-27: replaced Power BI (`sample1`, `sample2`) and Excel (`sample5`) screenshots with original DataCats-branded mocks that keep each app's chrome (Power BI Desktop canvas/page tabs, Excel ribbon/formula bar/grid); all 6 samples now use a 16/9 frame.
 - 2026-10-27: re-rendered the BigQuery sample (`light/dark-sample6.png`) with DataCats branding (logo header band, gold/cyan palette, Inter/JetBrains Mono).
+- 2026-10-27: replaced text logos with `logo-text-dark.svg` (used in light theme) and `logo-text-light.svg` (used in dark theme) in `Logo.tsx`, and updated `Navbar.tsx` to display the cat icon + text logo side by side.
+- 2026-10-30: integrated Google Analytics 4 (`G-WHJLEG19K8`) via `react-ga4` in `datacats-web/src/main.tsx` and added SPA route-change pageview tracking (`RouteTracker`) in `datacats-web/src/App.tsx`; updated `docs/ga4_react_setup_instructions.md` to reflect the TypeScript/Vite setup and verified `google-analytics.com/g/collect` requests across all routes.
