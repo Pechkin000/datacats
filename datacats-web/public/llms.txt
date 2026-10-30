@@ -1,0 +1,10 @@
+# Datacats Business Intelligence - Business Analytics for the Rest of Us
+
+> We bring affordable business intelligence to small businesses—without the enterprise price tag—by integrating your scattered data sources into the tools that best fit your workflow, unlocking a treasure trove of actionable insights and handing the keys straight to your stakeholders.
+
+## What we do
+- [Home](https://datacats.ca/): Describes common pain points and explains how we solve them
+- [Solutions](https://datacats.ca/presentation): Samples of our work, detailed description of what we offer.
+- [Penelope](https://datacats.ca/penelope): Special section dedicated to BI for Penelope - a popular software used by non profits
+- [Contact](https://datacats.ca/contact): Contact form.
+
