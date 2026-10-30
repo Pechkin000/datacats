@@ -31,7 +31,7 @@
     "page-design-guide": {
       "command": "node",
       "args": [
-        "/home/pechkin000/Development/FullStack/datacats/datacats-web/node_modules/page-design-guide-mcp/build/index.js"
+        "/home/pechkin000/Development/datacats/datacats-web/node_modules/page-design-guide-mcp/build/index.js"
       ]
     },
     "relume-library": {
