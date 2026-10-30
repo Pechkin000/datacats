@@ -1,6 +1,10 @@
 {
   "mcp": {
     "servers": {
+      "vscode": {
+        "command": "npx",
+        "args": ["-y", "vscode-as-mcp-server"]
+      },
       "material-design-3": {
         "command": "npx",
         "args": ["-y", "mcp-material-design-3"],

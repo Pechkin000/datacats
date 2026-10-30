@@ -18,6 +18,7 @@ Configured in `.vscode/.copilot/config.json` (GitHub Copilot) and `antigravity.m
 
 | Server | Use |
 |--------|-----|
+| `vscode` | VS Code editor, diagnostics, and integrated terminal access (requires the `acomagu.vscode-as-mcp-server` extension to be running) |
 | `material-design-3` | MD3 tokens and Tailwind mapping |
 | `relume-library` | Component and page-layout inspiration (remote, may need auth) |
 | `page-design-guide` | Page design guidance (installed in `datacats-web/node_modules`) |

@@ -2,7 +2,7 @@
   "mcpServers": {
     "vscode": {
       "command": "npx",
-      "args": ["vscode-as-mcp-server"]
+      "args": ["-y", "vscode-as-mcp-server"]
     },
     "material-design-3": {
       "command": "npx",

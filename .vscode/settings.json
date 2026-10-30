@@ -11,5 +11,6 @@
         "cp": true,
         "mkdir": true,
         "npm run dev": true
-    }
+    },
+    "postman.settings.dotenv-detection-notification-visibility": false
 }
