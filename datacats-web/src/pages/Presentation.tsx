@@ -5,7 +5,7 @@ import { useTheme } from '../hooks/useTheme';
 import { HeroBlock } from '../components/sections/HeroBlock';
 import { Section } from '../components/sections/Section';
 import { Card } from '../components/ui/Card';
-import { Badge } from '../components/ui/Badge';
+import { Badge, type BadgeVariant } from '../components/ui/Badge';
 
 const capabilities = [
   {
@@ -42,7 +42,7 @@ interface GalleryItem {
   id: number;
   title: string;
   platform: string;
-  color: string;
+  color: BadgeVariant;
   lightImage?: string;
   darkImage?: string;
   /** CSS aspect-ratio of the zoom frame (light image); keeps frame size fixed when toggling themes. */
@@ -182,7 +182,7 @@ export function Presentation() {
                 {cap.description}
               </p>
               <div className="mt-4">
-                <Badge variant={cap.color as 'gold' | 'cyan' | 'slate' | 'default'}>{cap.tag}</Badge>
+                <Badge variant={cap.color as BadgeVariant}>{cap.tag}</Badge>
               </div>
             </Card>
           ))}
@@ -279,7 +279,7 @@ export function Presentation() {
                         <ZoomIn className="h-5 w-5 text-light-text-primary dark:text-dark-text-primary" />
                       </div>
                       <div className="absolute bottom-3 left-3">
-                        <Badge variant={item.color as 'gold' | 'cyan' | 'slate' | 'default'}>{item.platform}</Badge>
+                        <Badge variant={item.color}>{item.platform}</Badge>
                       </div>
                     </Card>
                   </button>

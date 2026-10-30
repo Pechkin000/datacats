@@ -47,3 +47,5 @@ The site and lead backend run locally and are deployed to Namecheap cPanel via G
 - 2026-10-27: re-rendered the BigQuery sample (`light/dark-sample6.png`) with DataCats branding (logo header band, gold/cyan palette, Inter/JetBrains Mono).
 - 2026-10-27: replaced text logos with `logo-text-dark.svg` (used in light theme) and `logo-text-light.svg` (used in dark theme) in `Logo.tsx`, and updated `Navbar.tsx` to display the cat icon + text logo side by side.
 - 2026-10-30: integrated Google Analytics 4 (`G-WHJLEG19K8`) via `react-ga4` in `datacats-web/src/main.tsx` and added SPA route-change pageview tracking (`RouteTracker`) in `datacats-web/src/App.tsx`; updated `docs/ga4_react_setup_instructions.md` to reflect the TypeScript/Vite setup and verified `google-analytics.com/g/collect` requests across all routes.
+
+- 2026-10-30: fixed the Excel report sample pill by defining the missing green Badge variant with contrasting light/dark colors; typed gallery badge colors so unsupported variants are caught during builds.
