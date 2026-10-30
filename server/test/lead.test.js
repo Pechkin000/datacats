@@ -143,3 +143,45 @@ test('Origin check allows both apex and www subdomain when ALLOWED_ORIGIN is set
     delete process.env.ALLOWED_ORIGIN;
   }
 });
+
+test('SPA route handler injects route-specific SEO meta and returns 404 for unknown routes', async () => {
+  const fs = require('node:fs');
+  const os = require('node:os');
+  const path = require('node:path');
+  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'datacats-seo-'));
+  fs.writeFileSync(
+    path.join(tmpDir, 'index.html'),
+    [
+      '<!doctype html><html><head>',
+      '<title>Default Title</title>',
+      '<meta name="description" content="Default desc" />',
+      '<meta name="robots" content="index, follow" />',
+      '<link rel="canonical" href="https://datacats.ca/" />',
+      '<meta property="og:url" content="https://datacats.ca/" />',
+      '<meta property="og:title" content="Default Title" />',
+      '<meta property="og:description" content="Default desc" />',
+      '<meta name="twitter:title" content="Default Title" />',
+      '<meta name="twitter:description" content="Default desc" />',
+      '</head><body><div id="root"></div></body></html>',
+    ].join('\n')
+  );
+
+  try {
+    await withServer(createApp({ staticDir: tmpDir }), async (base) => {
+      const penelopeRes = await fetch(`${base}/penelope`);
+      assert.equal(penelopeRes.status, 200);
+      const penelopeHtml = await penelopeRes.text();
+      assert.match(penelopeHtml, /<title>Bonaterra Penelope Custom Reporting Services \| DataCats<\/title>/);
+      assert.match(penelopeHtml, /<link rel="canonical" href="https:\/\/datacats\.ca\/penelope" \/>/);
+      assert.match(penelopeHtml, /<meta property="og:url" content="https:\/\/datacats\.ca\/penelope" \/>/);
+      assert.match(penelopeHtml, /"@type":"FAQPage"/);
+
+      const notFoundRes = await fetch(`${base}/some-missing-page`);
+      assert.equal(notFoundRes.status, 404);
+      const notFoundHtml = await notFoundRes.text();
+      assert.match(notFoundHtml, /<meta name="robots" content="noindex, nofollow" \/>/);
+    });
+  } finally {
+    fs.rmSync(tmpDir, { recursive: true, force: true });
+  }
+});

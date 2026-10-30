@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Check, Loader2 } from 'lucide-react';
 import { clsx } from 'clsx';
+import { PageMeta } from '../components/layout/PageMeta';
 import { HeroBlock } from '../components/sections/HeroBlock';
 import { Section } from '../components/sections/Section';
 import { Button } from '../components/ui/Button';
@@ -188,6 +189,18 @@ export function Contact() {
 
   return (
     <>
+      <PageMeta
+        title="Contact DataCats | Start Your Custom Dashboard Project"
+        description="Contact DataCats Business Intelligence for a quick question or schedule a discovery call for Power BI, Tableau, Excel, BigQuery, or Penelope reporting."
+        path="/contact"
+        breadcrumbLabel="Contact"
+        jsonLd={{
+          '@type': 'ContactPage',
+          name: 'Contact DataCats Business Intelligence',
+          url: 'https://datacats.ca/contact',
+          mainEntity: { '@id': 'https://datacats.ca/#organization' },
+        }}
+      />
       <HeroBlock
         title="Let's build your dashboard."
         subtitle="Pick the path that fits: a quick question or a full discovery intake."

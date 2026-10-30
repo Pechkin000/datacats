@@ -13,7 +13,7 @@ The site and lead backend run locally and are deployed to Namecheap cPanel via G
 | 3. Core components | Done | Theme provider, Button, Card, Badge, Logo, Navbar (cat icon + text logo), Footer |
 | 4. Pages | Done | Home, Solutions, Penelope, Contact; all 6 gallery slots use DataCats-branded light/dark report screenshots with fixed 16:9 zoom frame |
 | 5. Styling and animation | Done | Hover bounce, framer-motion, reduced-motion support |
-| 6. Accessibility, SEO, and Analytics | Partial | Skip link, labels, aria on forms, page meta, GA4 (`G-WHJLEG19K8`) via `react-ga4` with SPA route tracking; no structured data |
+| 6. Accessibility, SEO, and Analytics | Done | Skip link, labels, aria on forms, per-route client & server meta/canonical/OG/Twitter tags, `robots.txt`, `sitemap.xml`, `og-image.png`, JSON-LD structured data, proper 404 status codes, GA4 (`G-WHJLEG19K8`) via `react-ga4` |
 | 7. Testing and QA | Partial | Backend tests pass; manual theme and form checks; GA4 network collect verified; no Lighthouse or cross-browser run |
 | 8. Deployment | Done | Automated GitHub Actions SSH deploy (`.github/workflows/deploy.yml`) to Namecheap cPanel Node.js 24 app |
 
@@ -49,3 +49,4 @@ The site and lead backend run locally and are deployed to Namecheap cPanel via G
 - 2026-10-30: integrated Google Analytics 4 (`G-WHJLEG19K8`) via `react-ga4` in `datacats-web/src/main.tsx` and added SPA route-change pageview tracking (`RouteTracker`) in `datacats-web/src/App.tsx`; updated `docs/ga4_react_setup_instructions.md` to reflect the TypeScript/Vite setup and verified `google-analytics.com/g/collect` requests across all routes.
 
 - 2026-10-30: fixed the Excel report sample pill by defining the missing green Badge variant with contrasting light/dark colors; typed gallery badge colors so unsupported variants are caught during builds.
+- 2026-10-30: completed full SEO optimization across frontend and Express backend: added `<PageMeta>` (`datacats-web/src/components/layout/PageMeta.tsx`) and server-side route metadata injection (`server/src/app.js`) for `/`, `/presentation`, `/penelope`, and `/contact`; added `NotFound` (`404`) page and HTTP 404 status handling for unknown routes; generated `favicon.png` (6.6 KB), `apple-touch-icon.png`, and `og-image.png` (1200x630 social card); added `robots.txt`, `sitemap.xml`, and Schema.org JSON-LD (`ProfessionalService`, `WebSite`, `BreadcrumbList`, `ItemList`, `Service`, `FAQPage`, `ContactPage`); added Penelope custom reporting FAQ section, explicit image dimensions, lazy loading, and `mailto:` contact link.

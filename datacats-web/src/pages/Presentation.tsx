@@ -2,6 +2,7 @@ import { FileSpreadsheet, BarChart3, Map, Database, X, ZoomIn, Sun, Moon } from 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../hooks/useTheme';
+import { PageMeta } from '../components/layout/PageMeta';
 import { HeroBlock } from '../components/sections/HeroBlock';
 import { Section } from '../components/sections/Section';
 import { Card } from '../components/ui/Card';
@@ -162,6 +163,21 @@ export function Presentation() {
 
   return (
     <>
+      <PageMeta
+        title="Power BI, Tableau, Excel & BigQuery Dashboards | DataCats"
+        description="Explore sample executive dashboards, sales pipelines, utilization heatmaps, and automated financial workbooks across Power BI, Tableau, Excel & BigQuery."
+        path="/presentation"
+        breadcrumbLabel="Solutions"
+        jsonLd={{
+          '@type': 'ItemList',
+          name: 'DataCats Sample Business Intelligence Dashboards',
+          itemListElement: galleryItems.map((item, idx) => ({
+            '@type': 'ListItem',
+            position: idx + 1,
+            name: `${item.title} (${item.platform})`,
+          })),
+        }}
+      />
       <HeroBlock
         title="Your Data. Delivered in Any Flavor You Need."
         subtitle="From Excel workbooks to enterprise Power BI and Tableau dashboards—delivered how your team actually works."
@@ -265,6 +281,10 @@ export function Presentation() {
                         <img
                           src={itemImage}
                           alt={`${item.title} (${item.platform} ${sectionReportTheme} theme sample)`}
+                          width={2400}
+                          height={1350}
+                          loading="lazy"
+                          decoding="async"
                           className="h-full w-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
                         />
                       ) : (

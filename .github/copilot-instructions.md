@@ -1,5 +1,7 @@
 # DataCats Project Guidelines
 
+Always use the `vscode-as-terminal` tool for running shell commands. Do not trigger hidden background tasks.
+
 DataCats Business Intelligence marketing site: a React frontend (`datacats-web/`) plus a small Node backend (`server/`) that emails contact-form leads.
 
 ## Working Rules
@@ -29,3 +31,5 @@ DataCats Business Intelligence marketing site: a React frontend (`datacats-web/`
 - Status log (keep updated): `docs/current_work.md`
 - MCP servers are defined twice and must stay in sync: `.vscode/.copilot/config.json` (Copilot, `mcp.servers`) and `antigravity.mcp.json` (Antigravity, `mcpServers`).
 - Open Terminal (`http://10.0.0.149:8888/docs`, bearer key required) is a remote terminal on another machine, not an MCP server. Use the VS Code terminal for project commands.
+
+

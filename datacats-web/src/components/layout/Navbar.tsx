@@ -20,8 +20,8 @@ export function Navbar() {
       <div className="border-b border-slate-200/50 bg-light-surface/80 dark:border-slate-800/50 dark:bg-dark-surface/80">
         <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
           <Link to="/" className="flex items-center gap-2 interactive">
-            <Logo variant="icon" className="h-10 w-auto" />
-            <Logo variant="text" className="h-7 w-auto sm:h-8" />
+            <Logo variant="icon" alt="" className="h-10 w-auto" />
+            <Logo variant="text" alt="DataCats Business Intelligence" className="h-7 w-auto sm:h-8" />
           </Link>
 
           <div className="hidden items-center gap-8 md:flex">

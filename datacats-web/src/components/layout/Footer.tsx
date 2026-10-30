@@ -17,9 +17,9 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-light-text-primary dark:text-dark-text-primary">
+            <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-light-text-primary dark:text-dark-text-primary">
               Quick Links
-            </h4>
+            </h2>
             <ul className="space-y-2 text-sm text-light-text-secondary dark:text-dark-text-secondary">
               <li><Link to="/" className="hover:text-brand-gold dark:hover:text-brand-cyan">Home</Link></li>
               <li><Link to="/presentation" className="hover:text-brand-gold dark:hover:text-brand-cyan">Solutions</Link></li>
@@ -29,11 +29,16 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-light-text-primary dark:text-dark-text-primary">
+            <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-light-text-primary dark:text-dark-text-primary">
               Contact
-            </h4>
+            </h2>
             <p className="text-sm text-light-text-secondary dark:text-dark-text-secondary">
-              josh@datacats.ca
+              <a
+                href="mailto:josh@datacats.ca"
+                className="hover:text-brand-gold dark:hover:text-brand-cyan"
+              >
+                josh@datacats.ca
+              </a>
             </p>
           </div>
         </div>

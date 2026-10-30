@@ -7,6 +7,7 @@ import { Home } from './pages/Home';
 import { Presentation } from './pages/Presentation';
 import { Penelope } from './pages/Penelope';
 import { Contact } from './pages/Contact';
+import { NotFound } from './pages/NotFound';
 
 function RouteTracker() {
   const location = useLocation();
@@ -38,6 +39,7 @@ function App() {
           <Route path="/presentation" element={<Presentation />} />
           <Route path="/penelope" element={<Penelope />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
       <Footer />

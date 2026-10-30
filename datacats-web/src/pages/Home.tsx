@@ -1,5 +1,6 @@
 import { TrendingUp, Users, Truck, Clock } from 'lucide-react';
 import { useTheme } from '../hooks/useTheme';
+import { PageMeta } from '../components/layout/PageMeta';
 import { HeroBlock } from '../components/sections/HeroBlock';
 import { FeatureCard } from '../components/sections/FeatureCard';
 import { Section } from '../components/sections/Section';
@@ -37,6 +38,11 @@ export function Home() {
 
   return (
     <>
+      <PageMeta
+        title="DataCats | Business Intelligence & Custom Dashboards"
+        description="Transform accounting, sales, CRM, EMR, and operations data into clear executive dashboards in Power BI, Tableau, Excel, BigQuery, and Bonaterra Penelope."
+        path="/"
+      />
       <HeroBlock
         title="Business Analytics for the rest of us."
         subtitle="Transform mountains of accounting, sales, and operations data into one clear, actionable dashboard."
@@ -45,7 +51,11 @@ export function Home() {
         media={
           <img
             src={heroGif}
-            alt="DataCats brand animation"
+            alt="DataCats Business Intelligence animated mascot and analytics illustration"
+            width={1112}
+            height={626}
+            fetchPriority="high"
+            decoding="async"
             className="mx-auto h-auto max-h-64 w-auto rounded-2xl shadow-2xl animate-float"
           />
         }
@@ -55,7 +65,7 @@ export function Home() {
       <Section muted>
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-3xl font-bold text-light-text-primary dark:text-dark-text-primary">
-            The Problem
+            The Problem: Siloed Data, Zero Clarity
           </h2>
           <p className="mt-4 text-lg text-light-text-secondary dark:text-dark-text-secondary">
             You generate mountain ranges of data every day across accounting, sales, and operations—yet gain zero actionable clarity.
@@ -66,10 +76,10 @@ export function Home() {
       <Section>
         <div className="mb-12 text-center">
           <h2 className="text-3xl font-bold text-light-text-primary dark:text-dark-text-primary">
-            The DataCats Solution
+            The DataCats Business Intelligence Solution
           </h2>
           <p className="mt-4 text-lg text-light-text-secondary dark:text-dark-text-secondary">
-            Four lenses that turn raw data into decisions.
+            Four analytical lenses that turn raw operational data into confident decisions.
           </p>
         </div>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
