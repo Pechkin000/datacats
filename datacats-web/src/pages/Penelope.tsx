@@ -119,7 +119,7 @@ export function Penelope() {
               <h3 className="mb-2 text-lg font-semibold text-light-text-primary dark:text-dark-text-primary">
                 {pillar.title}
               </h3>
-              <p className="text-sm text-light-text-secondary dark:text-dark-text-secondary">
+              <p className="text-base text-light-text-secondary dark:text-dark-text-secondary">
                 {pillar.description}
               </p>
             </Card>
@@ -129,7 +129,21 @@ export function Penelope() {
 
       <Section muted>
         <div className="grid items-center gap-12 lg:grid-cols-2">
-          <div className="order-2 lg:order-1">
+          <div className="lg:order-2">
+            <h2 className="text-3xl font-bold text-light-text-primary dark:text-dark-text-primary">
+              Built for Penelope users.
+            </h2>
+            <p className="mt-4 text-lg text-light-text-secondary dark:text-dark-text-secondary">
+              Whether you need board dashboards, grant reports, or clinical metrics, we extract and shape your Penelope data into exactly what stakeholders ask for.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-4">
+              <Button to="/contact">Start Your Penelope Project</Button>
+              <Button to="/presentation#gallery" variant="outline">
+                View Sample Dashboards
+              </Button>
+            </div>
+          </div>
+          <div className="lg:order-1">
             <div className="rounded-2xl bg-gradient-to-br from-slate-100 to-slate-200 p-8 dark:from-slate-800 dark:to-slate-900">
               <h3 className="mb-4 text-2xl font-bold text-light-text-primary dark:text-dark-text-primary">
                 The Competitive Edge
@@ -144,7 +158,7 @@ export function Penelope() {
                       <h4 className="font-semibold text-light-text-primary dark:text-dark-text-primary">
                         {edge.title}
                       </h4>
-                      <p className="text-sm text-light-text-secondary dark:text-dark-text-secondary">
+                      <p className="text-base text-light-text-secondary dark:text-dark-text-secondary">
                         {edge.description}
                       </p>
                     </div>
@@ -153,21 +167,10 @@ export function Penelope() {
               </div>
             </div>
           </div>
-          <div className="order-1 lg:order-2">
-            <h2 className="text-3xl font-bold text-light-text-primary dark:text-dark-text-primary">
-              Built for Penelope users.
-            </h2>
-            <p className="mt-4 text-lg text-light-text-secondary dark:text-dark-text-secondary">
-              Whether you need board dashboards, grant reports, or clinical metrics, we extract and shape your Penelope data into exactly what stakeholders ask for.
-            </p>
-            <div className="mt-8">
-              <Button to="/contact">Start Your Penelope Project</Button>
-            </div>
-          </div>
         </div>
       </Section>
 
-      <Section>
+      <Section id="faq">
         <div className="mx-auto max-w-4xl">
           <h2 className="mb-8 text-center text-3xl font-bold text-light-text-primary dark:text-dark-text-primary">
             Penelope Custom Reporting FAQ
@@ -178,7 +181,7 @@ export function Penelope() {
                 <h3 className="text-lg font-semibold text-light-text-primary dark:text-dark-text-primary">
                   {faq.question}
                 </h3>
-                <p className="mt-2 text-sm text-light-text-secondary dark:text-dark-text-secondary">
+                <p className="mt-2 text-base text-light-text-secondary dark:text-dark-text-secondary">
                   {faq.answer}
                 </p>
               </Card>

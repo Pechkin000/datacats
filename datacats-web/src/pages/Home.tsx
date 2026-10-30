@@ -35,6 +35,10 @@ export function Home() {
     theme === 'dark'
       ? '/assets/img/darke-theme/ba-rest-us-med-light.gif'
       : '/assets/img/ba-rest-us-med.gif';
+  const heroGifSmall =
+    theme === 'dark'
+      ? '/assets/img/darke-theme/ba-rest-us-sml-light.gif'
+      : '/assets/img/ba-rest-us-sml.gif';
 
   return (
     <>
@@ -49,20 +53,23 @@ export function Home() {
         primaryCta={{ label: 'Explore Dashboard Demos', to: '/presentation' }}
         secondaryCta={{ label: 'Get in Touch', to: '/contact' }}
         media={
-          <img
-            src={heroGif}
-            alt="DataCats Business Intelligence animated mascot and analytics illustration"
-            width={1112}
-            height={626}
-            fetchPriority="high"
-            decoding="async"
-            className="mx-auto h-auto max-h-64 w-auto rounded-2xl shadow-2xl animate-float"
-          />
+          <picture>
+            <source media="(max-width: 639px)" srcSet={heroGifSmall} />
+            <img
+              src={heroGif}
+              alt="DataCats Business Intelligence animated mascot and analytics illustration"
+              width={355}
+              height={200}
+              fetchPriority="high"
+              decoding="async"
+              className="mx-auto h-auto max-h-64 w-auto max-w-full rounded-2xl shadow-2xl animate-float"
+            />
+          </picture>
         }
         centered
       />
 
-      <Section muted>
+      <Section id="problem" muted>
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-3xl font-bold text-light-text-primary dark:text-dark-text-primary">
             The Problem: Siloed Data, Zero Clarity
@@ -73,7 +80,7 @@ export function Home() {
         </div>
       </Section>
 
-      <Section>
+      <Section id="solutions">
         <div className="mb-12 text-center">
           <h2 className="text-3xl font-bold text-light-text-primary dark:text-dark-text-primary">
             The DataCats Business Intelligence Solution
@@ -89,17 +96,20 @@ export function Home() {
         </div>
       </Section>
 
-      <Section muted>
+      <Section id="integrations" muted>
         <div className="grid items-center gap-12 lg:grid-cols-2">
           <div>
             <h2 className="text-3xl font-bold text-light-text-primary dark:text-dark-text-primary">
               Your data sources, unified.
             </h2>
             <p className="mt-4 text-lg text-light-text-secondary dark:text-dark-text-secondary">
-              QuickBooks, Salesforce, Square, Clover, your EMR, and more—flow into one clean, real-time executive dashboard.
+              QuickBooks, Salesforce, Square, Clover, Bonaterra Penelope, your EMR, and more—flow into one clean, real-time executive dashboard.
             </p>
-            <div className="mt-8">
+            <div className="mt-8 flex flex-wrap gap-4">
               <Button to="/contact">Start Your Free Discovery Call</Button>
+              <Button to="/penelope" variant="outline">
+                Explore Penelope Reporting
+              </Button>
             </div>
           </div>
           <div className="rounded-2xl bg-light-card p-6 shadow-lg dark:bg-dark-card">

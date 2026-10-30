@@ -37,7 +37,8 @@ export default {
         'cat-swipe': 'swipe 0.3s ease-in-out',
         'float': 'float 3s ease-in-out infinite',
         'bounce-subtle': 'bounceSubtle 0.3s ease-out',
-        'lift': 'lift 0.3s ease-out'
+        'lift': 'lift 0.3s ease-out',
+        'fade-up': 'fadeUp 0.45s ease-out both'
       },
       keyframes: {
         swipe: {
@@ -56,6 +57,10 @@ export default {
         lift: {
           '0%': { transform: 'translateY(0) scale(1)' },
           '100%': { transform: 'translateY(-4px) scale(1.02)' }
+        },
+        fadeUp: {
+          '0%': { opacity: '0', transform: 'translateY(12px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' }
         }
       }
     }

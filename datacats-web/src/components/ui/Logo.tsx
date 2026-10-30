@@ -23,8 +23,8 @@ export function Logo({
       case 'icon':
         return {
           src: `/assets/img/${themeDir}/logo-cat${suffix}.svg`,
-          width: 1418,
-          height: 1526,
+          width: 37,
+          height: 40,
         };
       case 'text':
         // Text logo is intentionally inverted: light-version file in dark theme, dark-version file in light theme
@@ -32,15 +32,15 @@ export function Logo({
           src: isDark
             ? '/assets/img/light-theme/logo-text-light.svg'
             : '/assets/img/darke-theme/logo-text-dark.svg',
-          width: isDark ? 722 : 705,
-          height: isDark ? 193 : 189,
+          width: 120,
+          height: 32,
         };
       case 'full':
       default:
         return {
           src: `/assets/img/${themeDir}/logo-text-cat${suffix}.svg`,
-          width: 1418,
-          height: 1526,
+          width: 149,
+          height: 160,
         };
     }
   }, [isDark, variant]);

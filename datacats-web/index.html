@@ -42,7 +42,23 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
 
     <!-- Structured Data (JSON-LD) -->
     <script id="datacats-jsonld-base" type="application/ld+json">
@@ -132,7 +148,77 @@
     </script>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <header class="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
+        <nav aria-label="Primary navigation" class="flex flex-wrap items-center justify-between gap-4">
+          <a href="/" class="inline-flex min-h-[48px] items-center px-3 py-2 text-lg font-bold">DataCats Business Intelligence</a>
+          <ul class="flex flex-wrap items-center gap-3 text-base">
+            <li><a href="/" class="inline-flex min-h-[48px] items-center px-3 py-2">Home</a></li>
+            <li><a href="/presentation" class="inline-flex min-h-[48px] items-center px-3 py-2">Solutions</a></li>
+            <li><a href="/presentation#gallery" class="inline-flex min-h-[48px] items-center px-3 py-2">Report Samples</a></li>
+            <li><a href="/penelope" class="inline-flex min-h-[48px] items-center px-3 py-2">Penelope Reporting</a></li>
+            <li><a href="/penelope#faq" class="inline-flex min-h-[48px] items-center px-3 py-2">Penelope FAQ</a></li>
+            <li><a href="/contact" class="inline-flex min-h-[48px] items-center px-3 py-2">Contact</a></li>
+          </ul>
+        </nav>
+      </header>
+      <main id="main" class="mx-auto max-w-7xl space-y-12 px-4 py-12 text-base sm:px-6 lg:px-8">
+        <section class="space-y-4">
+          <h1 class="text-3xl font-extrabold sm:text-5xl">Business Analytics for the rest of us.</h1>
+          <p class="text-base sm:text-lg">Transform mountains of accounting, sales, and operations data into one clear, actionable dashboard.</p>
+          <p class="flex flex-wrap gap-4 pt-2">
+            <a href="/presentation" class="inline-flex min-h-[48px] items-center rounded-full px-6 py-3 text-base font-semibold">Explore Dashboard Demos</a>
+            <a href="/contact" class="inline-flex min-h-[48px] items-center rounded-full px-6 py-3 text-base font-semibold">Get in Touch</a>
+          </p>
+        </section>
+        <section id="problem" class="space-y-3">
+          <h2 class="text-2xl font-bold sm:text-3xl">The Problem: Siloed Data, Zero Clarity</h2>
+          <p class="text-base sm:text-lg">You generate mountain ranges of data every day across accounting, sales, and operations—yet gain zero actionable clarity.</p>
+        </section>
+        <section id="solutions" class="space-y-4">
+          <h2 class="text-2xl font-bold sm:text-3xl">The DataCats Business Intelligence Solution</h2>
+          <p class="text-base sm:text-lg">Four analytical lenses that turn raw operational data into confident decisions.</p>
+          <article class="space-y-1">
+            <h3 class="text-lg font-semibold">Sales Patterns &amp; Revenue Streams</h3>
+            <p class="text-base">Uncover peak purchasing times, product affinity, and seasonal trends.</p>
+          </article>
+          <article class="space-y-1">
+            <h3 class="text-lg font-semibold">Patient &amp; Client Records</h3>
+            <p class="text-base">Track care pathways, service milestones, and demographic breakdowns safely.</p>
+          </article>
+          <article class="space-y-1">
+            <h3 class="text-lg font-semibold">Order Trends &amp; Logistics</h3>
+            <p class="text-base">Optimize inventory turns and supply chain timing.</p>
+          </article>
+          <article class="space-y-1">
+            <h3 class="text-lg font-semibold">Employee Time Utilization</h3>
+            <p class="text-base">Identify capacity bottlenecks, billable hours, and scheduling efficiency.</p>
+          </article>
+        </section>
+        <section id="integrations" class="space-y-4">
+          <h2 class="text-2xl font-bold sm:text-3xl">Your data sources, unified.</h2>
+          <p class="text-base sm:text-lg">QuickBooks, Salesforce, Square, Clover, Bonaterra Penelope, your EMR, and more—flow into one clean, real-time executive dashboard.</p>
+          <p class="flex flex-wrap gap-4 pt-2">
+            <a href="/contact" class="inline-flex min-h-[48px] items-center rounded-full px-6 py-3 text-base font-semibold">Start Your Free Discovery Call</a>
+            <a href="/penelope" class="inline-flex min-h-[48px] items-center rounded-full px-6 py-3 text-base font-semibold">Explore Penelope Reporting</a>
+            <a href="/presentation#gallery" class="inline-flex min-h-[48px] items-center rounded-full px-6 py-3 text-base font-semibold">View Power BI, Tableau &amp; Excel Samples</a>
+          </p>
+        </section>
+      </main>
+      <footer class="mx-auto max-w-7xl space-y-6 px-4 py-8 text-base sm:px-6 lg:px-8">
+        <h2 class="text-base font-semibold">Quick Links</h2>
+        <ul class="flex flex-wrap gap-3 text-base">
+          <li><a href="/" class="inline-flex min-h-[48px] items-center px-3 py-2">Home</a></li>
+          <li><a href="/presentation" class="inline-flex min-h-[48px] items-center px-3 py-2">Solutions</a></li>
+          <li><a href="/presentation#gallery" class="inline-flex min-h-[48px] items-center px-3 py-2">Report Samples</a></li>
+          <li><a href="/penelope" class="inline-flex min-h-[48px] items-center px-3 py-2">Penelope Reporting</a></li>
+          <li><a href="/penelope#faq" class="inline-flex min-h-[48px] items-center px-3 py-2">Penelope FAQ</a></li>
+          <li><a href="/contact" class="inline-flex min-h-[48px] items-center px-3 py-2">Contact</a></li>
+        </ul>
+        <h2 class="text-base font-semibold">Contact</h2>
+        <p class="text-base"><a href="mailto:josh@datacats.ca" class="inline-flex min-h-[48px] items-center px-3 py-2">josh@datacats.ca</a></p>
+      </footer>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

@@ -1,6 +1,5 @@
 import { FileSpreadsheet, BarChart3, Map, Database, X, ZoomIn, Sun, Moon } from 'lucide-react';
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../hooks/useTheme';
 import { PageMeta } from '../components/layout/PageMeta';
 import { HeroBlock } from '../components/sections/HeroBlock';
@@ -186,7 +185,15 @@ export function Presentation() {
         centered
       />
 
-      <Section>
+      <Section id="capabilities">
+        <div className="mb-12 text-center">
+          <h2 className="text-3xl font-bold text-light-text-primary dark:text-dark-text-primary">
+            Reporting Platforms &amp; Capabilities
+          </h2>
+          <p className="mt-4 text-lg text-light-text-secondary dark:text-dark-text-secondary">
+            Custom dashboards, automated spreadsheets, and scalable data pipelines tailored to your workflow.
+          </p>
+        </div>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {capabilities.map((cap) => (
             <Card key={cap.title} className="h-full">
@@ -194,7 +201,7 @@ export function Presentation() {
               <h3 className="mb-2 text-lg font-semibold text-light-text-primary dark:text-dark-text-primary">
                 {cap.title}
               </h3>
-              <p className="text-sm text-light-text-secondary dark:text-dark-text-secondary">
+              <p className="text-base text-light-text-secondary dark:text-dark-text-secondary">
                 {cap.description}
               </p>
               <div className="mt-4">
@@ -210,7 +217,7 @@ export function Presentation() {
           <h2 className="text-3xl font-bold text-light-text-primary dark:text-dark-text-primary">
             Report Samples
           </h2>
-          <div className="mt-3 flex flex-wrap items-center justify-center gap-3 text-light-text-secondary dark:text-dark-text-secondary">
+          <div className="mt-3 flex flex-wrap items-center justify-center gap-3 text-base text-light-text-secondary dark:text-dark-text-secondary">
             <p>Use the theme switcher to preview light/dark versions of the reports.</p>
             <button
               type="button"
@@ -220,7 +227,7 @@ export function Presentation() {
                   ? 'Preview light versions of reports'
                   : 'Preview dark versions of reports'
               }
-              className="group relative flex h-10 w-10 items-center justify-center rounded-full bg-light-card p-2 text-light-text-secondary shadow-sm transition-all duration-200 hover:scale-110 hover:text-brand-gold focus:outline-none focus:ring-2 focus:ring-brand-gold/50 dark:bg-dark-card dark:text-dark-text-secondary dark:hover:text-brand-cyan"
+              className="group relative flex h-12 w-12 items-center justify-center rounded-full bg-light-card p-2.5 text-light-text-secondary shadow-sm transition-[transform,color,background-color] duration-200 hover:scale-110 hover:text-brand-gold focus:outline-none focus:ring-2 focus:ring-brand-gold/50 dark:bg-dark-card dark:text-dark-text-secondary dark:hover:text-brand-cyan"
             >
               <span className="transition-transform duration-300 group-hover:animate-cat-swipe">
                 {sectionReportTheme === 'dark' ? (
@@ -233,10 +240,11 @@ export function Presentation() {
           </div>
         </div>
 
-        <div className="mb-8 flex flex-wrap justify-center gap-2">
+        <div className="mb-8 flex flex-wrap justify-center gap-3">
           <button
+            type="button"
             onClick={() => setFilter(null)}
-            className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
+            className={`inline-flex min-h-[48px] items-center rounded-full px-5 py-2.5 text-base font-medium transition-colors ${
               filter === null
                 ? 'bg-brand-gold text-slate-900 dark:bg-brand-cyan'
                 : 'bg-light-card text-light-text-secondary hover:text-light-text-primary dark:bg-dark-card dark:text-dark-text-secondary dark:hover:text-dark-text-primary'
@@ -247,8 +255,9 @@ export function Presentation() {
           {platforms.map((platform) => (
             <button
               key={platform}
+              type="button"
               onClick={() => setFilter(platform)}
-              className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
+              className={`inline-flex min-h-[48px] items-center rounded-full px-5 py-2.5 text-base font-medium transition-colors ${
                 filter === platform
                   ? 'bg-brand-gold text-slate-900 dark:bg-brand-cyan'
                   : 'bg-light-card text-light-text-secondary hover:text-light-text-primary dark:bg-dark-card dark:text-dark-text-secondary dark:hover:text-dark-text-primary'
@@ -259,127 +268,115 @@ export function Presentation() {
           ))}
         </div>
 
-        <motion.div layout className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          <AnimatePresence>
-            {filtered.map((item) => {
-              const itemImage =
-                sectionReportTheme === 'dark' ? item.darkImage : item.lightImage;
-              return (
-                <motion.div
-                  key={item.id}
-                  layout
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                >
-                  <button
-                    onClick={() => openReportModal(item.id)}
-                    className="w-full text-left"
-                  >
-                    <Card className="group relative aspect-[16/10] overflow-hidden p-0">
-                      {itemImage ? (
-                        <img
-                          src={itemImage}
-                          alt={`${item.title} (${item.platform} ${sectionReportTheme} theme sample)`}
-                          width={2400}
-                          height={1350}
-                          loading="lazy"
-                          decoding="async"
-                          className="h-full w-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
-                        />
-                      ) : (
-                        <div className="flex h-full w-full flex-col items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200 p-6 dark:from-slate-800 dark:to-slate-900">
-                          <BarChart3 className="mb-4 h-12 w-12 text-brand-gold/50 transition-transform duration-200 group-hover:scale-110 dark:text-brand-cyan/50" />
-                          <h3 className="text-center font-semibold text-light-text-primary dark:text-dark-text-primary">
-                            {item.title}
-                          </h3>
-                        </div>
-                      )}
-                      <div className="absolute right-3 top-3 rounded-full bg-light-card/80 p-1.5 opacity-0 shadow-sm backdrop-blur-sm transition-opacity duration-200 group-hover:opacity-100 dark:bg-dark-card/80">
-                        <ZoomIn className="h-5 w-5 text-light-text-primary dark:text-dark-text-primary" />
-                      </div>
-                      <div className="absolute bottom-3 left-3">
-                        <Badge variant={item.color}>{item.platform}</Badge>
-                      </div>
-                    </Card>
-                  </button>
-                </motion.div>
-              );
-            })}
-          </AnimatePresence>
-        </motion.div>
-      </Section>
-
-      <AnimatePresence>
-        {selectedItem && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={closeReportModal}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 p-4 backdrop-blur-sm"
-          >
-            <motion.div
-              initial={{ scale: 0.9 }}
-              animate={{ scale: 1 }}
-              exit={{ scale: 0.9 }}
-              onClick={(e) => e.stopPropagation()}
-              className="relative max-h-[90vh] w-full max-w-5xl overflow-auto rounded-2xl bg-light-card p-6 sm:p-8 dark:bg-dark-card"
-            >
-              <div className="mb-4 flex flex-wrap items-center justify-between gap-4 pr-12">
-                <h3 className="text-2xl font-bold text-light-text-primary dark:text-dark-text-primary">
-                  {selectedItem.title}
-                </h3>
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {filtered.map((item) => {
+            const itemImage =
+              sectionReportTheme === 'dark' ? item.darkImage : item.lightImage;
+            return (
+              <div key={item.id} className="animate-fade-up">
                 <button
                   type="button"
-                  onClick={toggleZoomedReportTheme}
-                  aria-label={
-                    activeZoomedTheme === 'dark' ? 'View Light Version' : 'View Dark Version'
-                  }
-                  className="group flex items-center gap-2 rounded-full bg-slate-100 px-3.5 py-2 text-sm font-medium text-light-text-secondary shadow-sm transition-all duration-200 hover:scale-105 hover:text-brand-gold focus:outline-none focus:ring-2 focus:ring-brand-gold/50 dark:bg-slate-800 dark:text-dark-text-secondary dark:hover:text-brand-cyan"
+                  onClick={() => openReportModal(item.id)}
+                  className="w-full text-left"
                 >
-                  <span className="transition-transform duration-300 group-hover:animate-cat-swipe">
-                    {activeZoomedTheme === 'dark' ? (
-                      <Sun className="h-4 w-4" />
+                  <Card className="group relative aspect-[16/10] overflow-hidden p-0">
+                    {itemImage ? (
+                      <img
+                        src={itemImage}
+                        alt={`${item.title} (${item.platform} ${sectionReportTheme} theme sample)`}
+                        width={320}
+                        height={180}
+                        loading="lazy"
+                        decoding="async"
+                        className="h-full w-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
+                      />
                     ) : (
-                      <Moon className="h-4 w-4" />
+                      <div className="flex h-full w-full flex-col items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200 p-6 dark:from-slate-800 dark:to-slate-900">
+                        <BarChart3 className="mb-4 h-12 w-12 text-brand-gold/50 transition-transform duration-200 group-hover:scale-110 dark:text-brand-cyan/50" />
+                        <h3 className="text-center font-semibold text-light-text-primary dark:text-dark-text-primary">
+                          {item.title}
+                        </h3>
+                      </div>
                     )}
-                  </span>
-                  <span>
-                    {activeZoomedTheme === 'dark' ? 'View Light Version' : 'View Dark Version'}
-                  </span>
+                    <div className="absolute right-3 top-3 rounded-full bg-light-card/80 p-1.5 opacity-0 shadow-sm backdrop-blur-sm transition-opacity duration-200 group-hover:opacity-100 dark:bg-dark-card/80">
+                      <ZoomIn className="h-5 w-5 text-light-text-primary dark:text-dark-text-primary" />
+                    </div>
+                    <div className="absolute bottom-3 left-3">
+                      <Badge variant={item.color}>{item.platform}</Badge>
+                    </div>
+                  </Card>
                 </button>
               </div>
+            );
+          })}
+        </div>
+      </Section>
+
+      {selectedItem && (
+        <div
+          onClick={closeReportModal}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 p-4 backdrop-blur-sm"
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="relative max-h-[90vh] w-full max-w-5xl overflow-auto rounded-2xl bg-light-card p-6 sm:p-8 dark:bg-dark-card"
+          >
+            <div className="mb-4 flex flex-wrap items-center justify-between gap-4 pr-14">
+              <h3 className="text-2xl font-bold text-light-text-primary dark:text-dark-text-primary">
+                {selectedItem.title}
+              </h3>
               <button
-                onClick={closeReportModal}
-                aria-label="Close preview"
-                className="absolute right-4 top-4 rounded-full bg-slate-100 p-2 text-slate-700 transition-colors hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700"
+                type="button"
+                onClick={toggleZoomedReportTheme}
+                aria-label={
+                  activeZoomedTheme === 'dark' ? 'View Light Version' : 'View Dark Version'
+                }
+                className="group inline-flex min-h-[48px] items-center gap-2 rounded-full bg-slate-100 px-4 py-2.5 text-sm font-medium text-light-text-secondary shadow-sm transition-[transform,color,background-color] duration-200 hover:scale-105 hover:text-brand-gold focus:outline-none focus:ring-2 focus:ring-brand-gold/50 dark:bg-slate-800 dark:text-dark-text-secondary dark:hover:text-brand-cyan"
               >
-                <X className="h-5 w-5" />
+                <span className="transition-transform duration-300 group-hover:animate-cat-swipe">
+                  {activeZoomedTheme === 'dark' ? (
+                    <Sun className="h-4 w-4" />
+                  ) : (
+                    <Moon className="h-4 w-4" />
+                  )}
+                </span>
+                <span>
+                  {activeZoomedTheme === 'dark' ? 'View Light Version' : 'View Dark Version'}
+                </span>
               </button>
-              {selectedImage ? (
-                <div
-                  className="w-full overflow-hidden rounded-xl border border-slate-200/60 shadow-lg dark:border-slate-700/60"
-                  style={{ aspectRatio: selectedItem.frameAspect }}
-                >
-                  <img
-                    src={selectedImage}
-                    alt={`${selectedItem.title} (${selectedItem.platform} ${activeZoomedTheme} theme preview)`}
-                    className="h-full w-full object-contain"
-                  />
-                </div>
-              ) : (
-                <>
-                  <div className="aspect-video rounded-xl bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900" />
-                  <p className="mt-4 text-light-text-secondary dark:text-dark-text-secondary">
-                    Sample report preview. In production this would show the actual dashboard screenshot.
-                  </p>
-                </>
-              )}
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            </div>
+            <button
+              type="button"
+              onClick={closeReportModal}
+              aria-label="Close preview"
+              className="absolute right-4 top-4 flex h-12 w-12 items-center justify-center rounded-full bg-slate-100 p-2.5 text-slate-700 transition-colors hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700"
+            >
+              <X className="h-5 w-5" />
+            </button>
+            {selectedImage ? (
+              <div
+                className="w-full overflow-hidden rounded-xl border border-slate-200/60 shadow-lg dark:border-slate-700/60"
+                style={{ aspectRatio: selectedItem.frameAspect }}
+              >
+                <img
+                  src={selectedImage}
+                  alt={`${selectedItem.title} (${selectedItem.platform} ${activeZoomedTheme} theme preview)`}
+                  width={320}
+                  height={180}
+                  className="h-full w-full object-contain"
+                />
+              </div>
+            ) : (
+              <>
+                <div className="aspect-video rounded-xl bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900" />
+                <p className="mt-4 text-base text-light-text-secondary dark:text-dark-text-secondary">
+                  Sample report preview. In production this would show the actual dashboard screenshot.
+                </p>
+              </>
+            )}
+          </div>
+        </div>
+      )}
     </>
   );
 }

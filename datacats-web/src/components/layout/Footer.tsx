@@ -11,7 +11,7 @@ export function Footer() {
         <div className="grid gap-8 md:grid-cols-3">
           <div className="space-y-4">
             <Logo variant="text" className="h-8 w-auto" />
-            <p className="max-w-xs text-sm text-light-text-secondary dark:text-dark-text-secondary">
+            <p className="max-w-xs text-base text-light-text-secondary dark:text-dark-text-secondary">
               Business analytics for the rest of us. Transforming raw data into clear, actionable insight.
             </p>
           </div>
@@ -20,11 +20,13 @@ export function Footer() {
             <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-light-text-primary dark:text-dark-text-primary">
               Quick Links
             </h2>
-            <ul className="space-y-2 text-sm text-light-text-secondary dark:text-dark-text-secondary">
-              <li><Link to="/" className="hover:text-brand-gold dark:hover:text-brand-cyan">Home</Link></li>
-              <li><Link to="/presentation" className="hover:text-brand-gold dark:hover:text-brand-cyan">Solutions</Link></li>
-              <li><Link to="/penelope" className="hover:text-brand-gold dark:hover:text-brand-cyan">Penelope</Link></li>
-              <li><Link to="/contact" className="hover:text-brand-gold dark:hover:text-brand-cyan">Contact</Link></li>
+            <ul className="space-y-1 text-base text-light-text-secondary dark:text-dark-text-secondary">
+              <li><Link to="/" className="inline-flex min-h-[48px] items-center py-2 hover:text-brand-gold dark:hover:text-brand-cyan">Home</Link></li>
+              <li><Link to="/presentation" className="inline-flex min-h-[48px] items-center py-2 hover:text-brand-gold dark:hover:text-brand-cyan">Solutions</Link></li>
+              <li><Link to="/presentation#gallery" className="inline-flex min-h-[48px] items-center py-2 hover:text-brand-gold dark:hover:text-brand-cyan">Report Samples</Link></li>
+              <li><Link to="/penelope" className="inline-flex min-h-[48px] items-center py-2 hover:text-brand-gold dark:hover:text-brand-cyan">Penelope Reporting</Link></li>
+              <li><Link to="/penelope#faq" className="inline-flex min-h-[48px] items-center py-2 hover:text-brand-gold dark:hover:text-brand-cyan">Penelope FAQ</Link></li>
+              <li><Link to="/contact" className="inline-flex min-h-[48px] items-center py-2 hover:text-brand-gold dark:hover:text-brand-cyan">Contact</Link></li>
             </ul>
           </div>
 
@@ -32,10 +34,10 @@ export function Footer() {
             <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-light-text-primary dark:text-dark-text-primary">
               Contact
             </h2>
-            <p className="text-sm text-light-text-secondary dark:text-dark-text-secondary">
+            <p className="text-base text-light-text-secondary dark:text-dark-text-secondary">
               <a
                 href="mailto:josh@datacats.ca"
-                className="hover:text-brand-gold dark:hover:text-brand-cyan"
+                className="inline-flex min-h-[48px] items-center py-2 hover:text-brand-gold dark:hover:text-brand-cyan"
               >
                 josh@datacats.ca
               </a>
@@ -44,10 +46,10 @@ export function Footer() {
         </div>
 
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-slate-200/50 pt-8 dark:border-slate-800/50 sm:flex-row">
-          <p className="text-xs text-light-text-secondary dark:text-dark-text-secondary">
+          <p className="text-sm text-light-text-secondary dark:text-dark-text-secondary">
             © {year} DataCats Business Intelligence. All rights reserved.
           </p>
-          <p className="text-xs text-light-text-secondary dark:text-dark-text-secondary">
+          <p className="text-sm text-light-text-secondary dark:text-dark-text-secondary">
             Made with 🐱 and data. (CI/CD Deployment v {appVersion})
           </p>
         </div>

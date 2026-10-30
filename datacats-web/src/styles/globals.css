@@ -5,21 +5,33 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+    overflow-x: hidden;
   }
 
   body {
-    @apply font-sans antialiased transition-colors duration-300;
+    @apply font-sans text-base antialiased transition-colors duration-200;
     @apply bg-light-surface text-light-text-primary;
+    overflow-x: hidden;
   }
 
   .dark body {
     @apply bg-dark-surface text-dark-text-primary;
   }
+
+  a,
+  button,
+  input,
+  select,
+  textarea {
+    touch-action: manipulation;
+  }
 }
 
 @layer components {
   .interactive {
-    @apply transition-all duration-200 ease-bounce;
+    @apply transition-transform duration-200 ease-bounce;
   }
 
   .interactive:hover {
@@ -31,7 +43,7 @@
   }
 
   .hover-lift {
-    @apply transition-all duration-200 ease-bounce;
+    @apply transition-[transform,box-shadow] duration-200 ease-bounce;
   }
 
   .hover-lift:hover {
@@ -51,7 +63,7 @@
   }
 
   .nav-link::after {
-    @apply absolute -bottom-1 left-0 h-0.5 w-0 bg-brand-gold transition-all duration-200 content-[''];
+    @apply absolute -bottom-1 left-0 h-0.5 w-0 bg-brand-gold transition-[width] duration-200 content-[''];
   }
 
   .nav-link:hover {
@@ -75,7 +87,7 @@
   }
 
   .surface-card {
-    @apply rounded-2xl bg-light-card p-6 shadow-sm transition-all duration-200 ease-bounce;
+    @apply rounded-2xl bg-light-card p-6 shadow-sm transition-[transform,box-shadow,background-color] duration-200 ease-bounce;
   }
 
   .dark .surface-card {

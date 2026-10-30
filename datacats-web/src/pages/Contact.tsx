@@ -19,7 +19,7 @@ const painPointOptions = [
 const industries = ['Healthcare / Social Services', 'Retail / POS', 'Professional Services', 'Logistics', 'Non-profit', 'Other'];
 
 const inputClass =
-  'w-full rounded-xl border bg-light-surface px-4 py-2.5 text-light-text-primary outline-none transition-all duration-200 focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20 dark:bg-dark-surface dark:text-dark-text-primary dark:focus:border-brand-cyan dark:focus:ring-brand-cyan/20';
+  'min-h-[48px] w-full rounded-xl border bg-light-surface px-4 py-3 text-base text-light-text-primary outline-none transition-[border-color,box-shadow] duration-200 focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20 dark:bg-dark-surface dark:text-dark-text-primary dark:focus:border-brand-cyan dark:focus:ring-brand-cyan/20';
 
 interface FieldProps {
   id: string;
@@ -33,7 +33,7 @@ function Field({ id, label, error, hint, children }: FieldProps) {
   const describedBy = error ? `${id}-error` : undefined;
   return (
     <div>
-      <label htmlFor={id} className="mb-1 block text-sm font-medium text-light-text-primary dark:text-dark-text-primary">
+      <label htmlFor={id} className="mb-1 block text-base font-medium text-light-text-primary dark:text-dark-text-primary">
         {label}
         {hint && <span className="ml-1 font-normal text-light-text-secondary dark:text-dark-text-secondary">({hint})</span>}
       </label>
@@ -44,7 +44,7 @@ function Field({ id, label, error, hint, children }: FieldProps) {
         'aria-describedby': describedBy,
       })}
       {error && (
-        <p id={describedBy} role="alert" className="mt-1 text-xs text-red-500">
+        <p id={describedBy} role="alert" className="mt-1 text-sm text-red-500">
           {error}
         </p>
       )}
@@ -65,8 +65,8 @@ function ChipGroup({
 }) {
   return (
     <fieldset>
-      <legend className="mb-2 block text-sm font-medium text-light-text-primary dark:text-dark-text-primary">{legend}</legend>
-      <div className="flex flex-wrap gap-2">
+      <legend className="mb-2 block text-base font-medium text-light-text-primary dark:text-dark-text-primary">{legend}</legend>
+      <div className="flex flex-wrap gap-3">
         {options.map((option) => {
           const active = selected.includes(option);
           return (
@@ -76,7 +76,7 @@ function ChipGroup({
               aria-pressed={active}
               onClick={() => onToggle(option)}
               className={clsx(
-                'interactive rounded-full px-4 py-1.5 text-sm font-medium',
+                'interactive inline-flex min-h-[48px] items-center rounded-full px-4 py-2.5 text-sm font-medium',
                 active
                   ? 'bg-brand-gold text-slate-900 dark:bg-brand-cyan'
                   : 'bg-light-surface text-light-text-secondary hover:text-light-text-primary dark:bg-dark-surface dark:text-dark-text-secondary dark:hover:text-dark-text-primary'
@@ -181,7 +181,7 @@ export function Contact() {
 
   const tabClass = (active: boolean) =>
     clsx(
-      'interactive rounded-full px-6 py-2 text-sm font-medium',
+      'interactive inline-flex min-h-[48px] items-center rounded-full px-6 py-3 text-base font-medium',
       active
         ? 'bg-brand-gold text-slate-900 dark:bg-brand-cyan'
         : 'bg-light-card text-light-text-secondary hover:text-light-text-primary dark:bg-dark-card dark:text-dark-text-secondary dark:hover:text-dark-text-primary'
@@ -209,6 +209,9 @@ export function Contact() {
 
       <Section muted>
         <div className="mx-auto max-w-3xl">
+          <h2 className="mb-6 text-center text-2xl font-bold text-light-text-primary dark:text-dark-text-primary">
+            Send a Message or Request a Discovery Call
+          </h2>
           <div className="mb-8 flex justify-center gap-4" role="group" aria-label="Form type">
             <button type="button" aria-pressed={mode === 'quick'} onClick={() => setMode('quick')} className={tabClass(mode === 'quick')}>
               Quick Connect

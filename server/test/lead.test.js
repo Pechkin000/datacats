@@ -144,7 +144,7 @@ test('Origin check allows both apex and www subdomain when ALLOWED_ORIGIN is set
   }
 });
 
-test('SPA route handler injects route-specific SEO meta and returns 404 for unknown routes', async () => {
+test('SPA route handler injects route-specific SEO meta, headings, internal links, and 301 redirects www/http', async () => {
   const fs = require('node:fs');
   const os = require('node:os');
   const path = require('node:path');
@@ -168,18 +168,64 @@ test('SPA route handler injects route-specific SEO meta and returns 404 for unkn
 
   try {
     await withServer(createApp({ staticDir: tmpDir }), async (base) => {
+      const homeRes = await fetch(`${base}/`);
+      assert.equal(homeRes.status, 200);
+      assert.equal(homeRes.headers.get('timing-allow-origin'), '*');
+      assert.equal(homeRes.headers.get('access-control-allow-origin'), '*');
+      const homeHtml = await homeRes.text();
+      assert.match(homeHtml, /<h1[^>]*>Business Analytics for the rest of us\.<\/h1>/);
+      assert.match(homeHtml, /<h2[^>]*>The Problem: Siloed Data, Zero Clarity<\/h2>/);
+      assert.match(homeHtml, /<h3[^>]*>Sales Patterns &amp; Revenue Streams<\/h3>/);
+      assert.match(homeHtml, /<a href="\/presentation"[^>]*>/);
+      assert.match(homeHtml, /<a href="\/penelope"[^>]*>/);
+      assert.match(homeHtml, /<a href="\/contact"[^>]*>/);
+
       const penelopeRes = await fetch(`${base}/penelope`);
       assert.equal(penelopeRes.status, 200);
       const penelopeHtml = await penelopeRes.text();
       assert.match(penelopeHtml, /<title>Bonaterra Penelope Custom Reporting Services \| DataCats<\/title>/);
       assert.match(penelopeHtml, /<link rel="canonical" href="https:\/\/datacats\.ca\/penelope" \/>/);
       assert.match(penelopeHtml, /<meta property="og:url" content="https:\/\/datacats\.ca\/penelope" \/>/);
+      assert.match(penelopeHtml, /<h1[^>]*>Unlock Your Penelope Client Data—Without the Enterprise Price Tag\.<\/h1>/);
+      assert.match(penelopeHtml, /<h2[^>]*>Penelope Reporting Value Pillars<\/h2>/);
       assert.match(penelopeHtml, /"@type":"FAQPage"/);
+
+      const wwwRes = await fetch(`${base}/penelope`, {
+        headers: { 'X-Forwarded-Host': 'www.datacats.ca' },
+        redirect: 'manual',
+      });
+      assert.equal(wwwRes.status, 301);
+      assert.equal(wwwRes.headers.get('location'), 'https://datacats.ca/penelope');
+
+      const directHostRes = await new Promise((resolve, reject) => {
+        const u = new URL(`${base}/penelope`);
+        http
+          .get({ hostname: u.hostname, port: u.port, path: u.pathname, headers: { Host: 'www.datacats.ca' } }, resolve)
+          .on('error', reject);
+      });
+      assert.equal(directHostRes.statusCode, 301);
+      assert.equal(directHostRes.headers.location, 'https://datacats.ca/penelope');
+
+      const httpRes = await fetch(`${base}/contact`, {
+        headers: { 'X-Forwarded-Host': 'datacats.ca', 'X-Forwarded-Proto': 'http' },
+        redirect: 'manual',
+      });
+      assert.equal(httpRes.status, 301);
+      assert.equal(httpRes.headers.get('location'), 'https://datacats.ca/contact');
+
+      const trailingRes = await fetch(`${base}/presentation/`, { redirect: 'manual' });
+      assert.equal(trailingRes.status, 301);
+      assert.equal(trailingRes.headers.get('location'), '/presentation');
+
+      const indexHtmlRes = await fetch(`${base}/index.html`, { redirect: 'manual' });
+      assert.equal(indexHtmlRes.status, 301);
+      assert.equal(indexHtmlRes.headers.get('location'), '/');
 
       const notFoundRes = await fetch(`${base}/some-missing-page`);
       assert.equal(notFoundRes.status, 404);
       const notFoundHtml = await notFoundRes.text();
       assert.match(notFoundHtml, /<meta name="robots" content="noindex, nofollow" \/>/);
+      assert.match(notFoundHtml, /<h1[^>]*>This cat wandered off the chart\.<\/h1>/);
     });
   } finally {
     fs.rmSync(tmpDir, { recursive: true, force: true });

@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion';
 import { Button } from '../ui/Button';
 
 interface HeroBlockProps {
@@ -19,22 +18,18 @@ export function HeroBlock({
   centered = false,
 }: HeroBlockProps) {
   return (
-    <section className="relative overflow-hidden px-4 py-20 sm:px-6 lg:px-8">
+    <section className="relative overflow-hidden px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
       <div
         className={`mx-auto max-w-7xl ${
           centered ? 'text-center' : ''
         }`}
       >
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: 'easeOut' }}
-        >
-          <h1 className="text-balance text-4xl font-extrabold tracking-tight text-light-text-primary sm:text-5xl lg:text-6xl dark:text-dark-text-primary">
+        <div className="animate-fade-up">
+          <h1 className="text-balance text-3xl font-extrabold tracking-tight text-light-text-primary sm:text-5xl lg:text-6xl dark:text-dark-text-primary">
             {title}
           </h1>
           {subtitle && (
-            <p className="mx-auto mt-6 max-w-2xl text-lg text-light-text-secondary dark:text-dark-text-secondary">
+            <p className="mx-auto mt-6 max-w-2xl text-base text-light-text-secondary sm:text-lg dark:text-dark-text-secondary">
               {subtitle}
             </p>
           )}
@@ -53,17 +48,12 @@ export function HeroBlock({
               )}
             </div>
           )}
-        </motion.div>
+        </div>
 
         {media && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
-            className="mt-12"
-          >
+          <div className="mt-12 animate-fade-up">
             {media}
-          </motion.div>
+          </div>
         )}
       </div>
     </section>
