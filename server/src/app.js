@@ -359,6 +359,39 @@ function escapeHtmlAttr(str) {
     .replace(/>/g, '&gt;');
 }
 
+function injectGTM(html) {
+  const gtmContainerId = 'GTM-M8TZBJ5P';
+
+  const gtmScript = `
+    <!-- Google Tag Manager -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    </script>
+    <script async src="https://www.googletagmanager.com/gtm.js?id=${gtmContainerId}"></script>
+    <!-- End Google Tag Manager -->
+  `;
+
+  const gtmNoscript = `
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=${gtmContainerId}"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+  `;
+
+  let processedHtml = html;
+  if (!processedHtml.includes(`gtm.js?id=${gtmContainerId}`)) {
+    processedHtml = processedHtml.replace('</head>', `${gtmScript}</head>`);
+  }
+  if (!processedHtml.includes(`ns.html?id=${gtmContainerId}`)) {
+    processedHtml = processedHtml.replace('<body>', `<body>${gtmNoscript}`);
+  }
+
+  return processedHtml;
+}
+
 function renderIndexHtml(template, meta) {
   const title = escapeHtmlAttr(meta.title);
   const desc = escapeHtmlAttr(meta.description);
@@ -413,7 +446,7 @@ function renderIndexHtml(template, meta) {
     html = html.replace('</head>', `  ${jsonLdTag}\n  </head>`);
   }
 
-  return html;
+  return injectGTM(html);
 }
 
 function isOriginAllowed(origin, allowedRaw) {
@@ -573,4 +606,4 @@ function createApp({ staticDir = process.env.STATIC_DIR || path.join(__dirname, 
   return app;
 }
 
-module.exports = { createApp, ROUTE_META };
+module.exports = { createApp, ROUTE_META, injectGTM };

@@ -179,6 +179,9 @@ test('SPA route handler injects route-specific SEO meta, headings, internal link
       assert.match(homeHtml, /<a href="\/presentation"[^>]*>/);
       assert.match(homeHtml, /<a href="\/penelope"[^>]*>/);
       assert.match(homeHtml, /<a href="\/contact"[^>]*>/);
+      assert.match(homeHtml, /https:\/\/www\.googletagmanager\.com\/gtm\.js\?id=GTM-M8TZBJ5P/);
+      assert.match(homeHtml, /https:\/\/www\.googletagmanager\.com\/ns\.html\?id=GTM-M8TZBJ5P/);
+      assert.match(homeHtml, /'gtm\.start'/);
 
       const penelopeRes = await fetch(`${base}/penelope`);
       assert.equal(penelopeRes.status, 200);
